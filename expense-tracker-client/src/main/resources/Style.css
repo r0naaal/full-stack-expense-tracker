@@ -1,0 +1,245 @@
+/* --- Debugging Styles (Currently commented out) --- */
+/* These are useful for visualizing layout boundaries during development. */
+/*
+Label, TextField, Button, PasswordField, ComboBox, DatePicker{
+    -fx-border-width: 1px;
+    -fx-border-color: #fff;
+}
+VBox {
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+HBox {
+    -fx-border-width: 1px;
+    -fx-border-color: blue;
+}
+GridPane {
+    -fx-border-width: 1px;
+    -fx-border-color: green;
+}
+*/
+
+/* --- Generic Component Styles --- */
+/* Styles that apply broadly to common UI elements. */
+Button {
+    -fx-cursor: hand; /* Changes cursor to a hand when hovering over buttons */
+}
+
+.combo-box .list-cell:hover,
+Button:hover{
+    -fx-opacity: 0.5; /* Reduces opacity on hover for ComboBox list items and Buttons */
+}
+
+/* Solves issue with default ScrollPane background */
+ScrollPane,
+ScrollPane > .viewport {
+   -fx-background-color: transparent; /* Makes the ScrollPane and its viewport transparent */
+}
+
+/* --- TableView Styles --- */
+/* Specific styling for JavaFX TableView components. */
+.table-view .column-header{
+    -fx-background-color: #515050; /* Background color for table column headers */
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: #fff; /* Text color for column header labels */
+}
+
+.table-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical{
+    -fx-opacity: 0; /* Hides horizontal and vertical scrollbars in TableView */
+    -fx-pref-width: 0; /* Sets preferred width of horizontal scrollbar to 0 */
+    -fx-pref-height: 0; /* Sets preferred height of vertical scrollbar to 0 */
+}
+
+/* --- Bar Chart Styles --- */
+/* Styling for JavaFX BarChart components. */
+.axis-label{
+    -fx-text-fill: #BEB9B9; /* Text color for chart axis labels */
+}
+
+.default-color0.chart-legend-item-symbol{
+    -fx-background-color: #33ba2f; /* Background color for the first legend item symbol */
+}
+
+.default-color1.chart-legend-item-symbol{
+    -fx-background-color: #ba2f2f; /* Background color for the second legend item symbol */
+}
+
+/* --- Text Utility Classes --- */
+/* Classes for controlling text size, color, and weight. */
+.text-size-lg{
+    -fx-font-size: 36px; /* Large font size */
+}
+
+.text-size-md{
+    -fx-font-size: 24px; /* Medium font size */
+}
+
+.text-size-sm{
+    -fx-font-size: 12px; /* Small font size */
+}
+
+.text-white{
+    -fx-text-fill: #fff; /* White text color */
+}
+
+.text-light-red{
+    -fx-text-fill: #ba2f2f; /* Light red text color */
+}
+
+.text-light-green{
+    -fx-text-fill: #33ba2f; /* Light green text color */
+}
+
+.text-light-gray{
+    -fx-text-fill: #BEB9B9; /* Light gray text color */
+}
+
+.text-weight-700{
+    -fx-font-weight: 700; /* Bold font weight */
+}
+
+/* --- Background Color Utility Classes --- */
+/* Classes for applying specific background colors. */
+.bg-light-blue{
+    -fx-background-color: #377BE1; /* Light blue background */
+}
+
+.bg-light-red{
+    -fx-background-color: #e13742; /* Light red background */
+}
+
+/* --- Text Decoration Utility Classes --- */
+/* Classes for applying text decorations. */
+.text-underline{
+    -fx-underline: true; /* Underlines text */
+}
+
+/* --- Padding Utility Classes --- */
+/* Classes for applying specific padding. */
+.padding-10px{
+    -fx-padding: 10px; /* 10px padding on all sides */
+}
+
+/* --- Border Utility Classes --- */
+/* Classes for applying border styles. */
+.rounded-border{
+    -fx-border-radius: 10px; /* Applies a 10px border radius */
+    -fx-background-radius: 10px; /* Applies a 10px background radius (for consistent rounding) */
+}
+
+.border-light-gray{
+    -fx-border-width: 5px; /* 5px border width */
+    -fx-border-color: #515050; /* Light gray border color */
+}
+
+/* --- Custom Application-Specific Classes (including combined styles) --- */
+/* Styles tailored to specific parts of your application's UI,
+   now including the login form elements. */
+
+/* Main application background */
+.main-background{
+    -fx-background-color: #383838;
+}
+
+/* Header style for general use */
+.header{
+    -fx-font-size: 96px;
+    -fx-font-weight: 300;
+}
+
+/* General field background, also used for input fields */
+.field-background{
+    -fx-background-color: #515050;
+}
+
+/* Link-like text styling */
+.link-text{
+    -fx-cursor: hand;
+}
+
+.link-text:hover{
+    -fx-text-fill: #4265c7;
+}
+
+/* Padding for dashboard sections */
+.dashboard-padding{
+    -fx-padding: 33px 43px;
+}
+
+/* Styling for ComboBox and DatePicker text fields */
+.combo-box .list-cell,
+.date-picker .text-field {
+    -fx-background-color: #515050; /* Background color */
+    -fx-text-fill: #BEB9B9;         /* Font color */
+}
+
+/* --- Login Form Specific Styles (from initial HTML/CSS) --- */
+
+/* Corresponds to <div class="container--0-"> - The main rounded background panel */
+.container--0- {
+    -fx-background-color: #CACACA;
+    -fx-opacity: 0.92;
+    -fx-background-radius: 32.4861;
+
+    /* Drop shadow effect - JavaFX equivalent for SVG filter0_d_3_31 */
+    /* The exact replication of SVG filter is complex.
+     * These values are a reasonable approximation for a shadow in JavaFX.
+     * Adjust radius and offset to fine-tune the look.
+     */
+    -fx-effect: dropshadow(GAUSSIAN, rgba(0, 0, 0, 0.25), 5, 0, 0, 3.51201);
+}
+
+/* Corresponds to <div class="container-0-1-1"> and <div class="container-0-1-3"> */
+/* These are likely wrappers for input fields (e.g., email/password boxes). */
+.container-0-1-1,
+.container-0-1-3 {
+    /* You'll need to decide on layout properties in your FXML/Java code.
+     * These styles could be applied to a HBox, VBox, or StackPane that contains the input.
+     * Consider adding padding or alignment if needed, e.g.:
+     * -fx-padding: 5px;
+     * -fx-alignment: CENTER_LEFT;
+     */
+}
+
+/* Corresponds to <div class="container-1-2-2"> inside input field containers */
+/* This is likely the visual background for the text input area. */
+.container-1-2-2 {
+    -fx-background-color: white; /* Assuming this is the white background for the input */
+    -fx-background-radius: 5; /* Example radius for rounded input fields */
+    -fx-padding: 8px 10px; /* Padding inside the input area */
+}
+
+/* Corresponds to <div class="text-2-3-0"> - Placeholder text (e.g., "Enter Email") */
+/* This style can be applied to a Label inside your input field or a custom TextField. */
+.text-2-3-0 {
+    -fx-fill: #A0A0A0; /* Placeholder text color */
+    -fx-font-size: 14px; /* Font size for placeholder text */
+}
+
+/* Corresponds to <div class="text-0-1-2"> - "Forgot password?" text */
+/* Apply this to a Label or Hyperlink node. */
+.text-0-1-2 {
+    -fx-fill: #3366BB; /* Blue color for the link */
+    -fx-font-size: 12px;
+    -fx-underline: true; /* Underlines the text to indicate a link */
+}
+
+/* Corresponds to <div class="text-0-1-4"> - "Welcome Back!" heading */
+/* Apply this to a Label node. */
+.text-0-1-4 {
+    -fx-fill: #333333; /* Dark text color */
+    -fx-font-size: 24px; /* Larger font size */
+    -fx-font-weight: bold; /* Bold text */
+}
+
+/*
+ * Note on SVG and Rectangles:
+ * The original HTML included an SVG with a <rect> element.
+ * In JavaFX, you typically won't style the raw SVG <rect> directly via CSS like this.
+ * Instead, the properties of the main container (.container--0-)
+ * (like background color, radius, and drop shadow) are applied to a JavaFX Node (e.g., a Pane or Region)
+ * to achieve a similar visual effect as the SVG background.
+ */
