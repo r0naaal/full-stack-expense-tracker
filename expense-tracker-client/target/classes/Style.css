@@ -24,9 +24,13 @@ GridPane {
 }
 */
 
-VBox {
-    -fx-border-width: 1px;
-    -fx-border-color: red;
+
+.bg-main-card {
+    -fx-background-color: #a0a0a0c5;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px; 
+
+    
 }
 
 /* --- Generic Component Styles --- */
@@ -84,11 +88,11 @@ ScrollPane > .viewport {
 }
 
 .text-size-lg{
-    -fx-font-size: 36px; /* Large font size */
+    -fx-font-size: 25px; /* Large font size */
 }
 
 .text-size-md{
-    -fx-font-size: 24px; /* Medium font size */
+    -fx-font-size: 18px; /* Medium font size */
 }
 
 .text-size-sm{
@@ -96,7 +100,7 @@ ScrollPane > .viewport {
 }
 
 .text-black {
-    -fx-text-fill: #161616; /* 30% transparent-black */
+    -fx-text-fill: #161616c4; /* 30% transparent-black */
 }
 
 .text-white{
@@ -149,8 +153,8 @@ ScrollPane > .viewport {
 /* --- Border Utility Classes --- */
 /* Classes for applying border styles. */
 .rounded-border{
-    -fx-border-radius: 20px; /* Applies a 10px border radius */
-    -fx-background-radius: 20px; /* Applies a 10px background radius (for consistent rounding) */
+    -fx-border-radius: 10px; /* Applies a 10px border radius */
+    -fx-background-radius: 10px; /* Applies a 10px background radius (for consistent rounding) */
 }
 
 /* --- Custom Application-Specific Classes (including combined styles) --- */
@@ -167,7 +171,8 @@ ScrollPane > .viewport {
 /* Header style for general use */
 
 .header{
-    -fx-font-size: 96px;
+    -fx-padding: 20 0 30 0; /* top right bottom left */
+    -fx-font-size: 35px;
     -fx-font-weight: 300;
 }
 
