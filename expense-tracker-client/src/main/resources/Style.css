@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Lilita One';
+    src: url('fonts/LilitaOne-Regular.ttf');
+}
+
 /* --- Debugging Styles (Currently commented out) --- */
 /* These are useful for visualizing layout boundaries during development. */
 /*
@@ -18,6 +23,11 @@ GridPane {
     -fx-border-color: green;
 }
 */
+
+VBox {
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
 
 /* --- Generic Component Styles --- */
 /* Styles that apply broadly to common UI elements. */
@@ -69,6 +79,10 @@ ScrollPane > .viewport {
 
 /* --- Text Utility Classes --- */
 /* Classes for controlling text size, color, and weight. */
+.font-lilita {
+    -fx-font-family: 'Lilita One';
+}
+
 .text-size-lg{
     -fx-font-size: 36px; /* Large font size */
 }
@@ -81,8 +95,15 @@ ScrollPane > .viewport {
     -fx-font-size: 12px; /* Small font size */
 }
 
+.text-black {
+    -fx-text-fill: #161616; /* 30% transparent-black */
+}
+
 .text-white{
     -fx-text-fill: #fff; /* White text color */
+}
+.text-light-blue {
+    -fx-text-fill: #3364cc; /* White text color */
 }
 
 .text-light-red{
@@ -103,8 +124,10 @@ ScrollPane > .viewport {
 
 /* --- Background Color Utility Classes --- */
 /* Classes for applying specific background colors. */
-.bg-light-blue{
-    -fx-background-color: #377BE1; /* Light blue background */
+
+/* used for button */
+.bg-black{
+    -fx-background-color: #202020; 
 }
 
 .bg-light-red{
@@ -126,13 +149,8 @@ ScrollPane > .viewport {
 /* --- Border Utility Classes --- */
 /* Classes for applying border styles. */
 .rounded-border{
-    -fx-border-radius: 10px; /* Applies a 10px border radius */
-    -fx-background-radius: 10px; /* Applies a 10px background radius (for consistent rounding) */
-}
-
-.border-light-gray{
-    -fx-border-width: 5px; /* 5px border width */
-    -fx-border-color: #515050; /* Light gray border color */
+    -fx-border-radius: 20px; /* Applies a 10px border radius */
+    -fx-background-radius: 20px; /* Applies a 10px background radius (for consistent rounding) */
 }
 
 /* --- Custom Application-Specific Classes (including combined styles) --- */
@@ -140,19 +158,27 @@ ScrollPane > .viewport {
    now including the login form elements. */
 
 /* Main application background */
-.main-background{
-    -fx-background-color: #383838;
+
+.main-background {
+    -fx-background-image: url("images/background.png");
+    -fx-background-size: cover;
 }
 
 /* Header style for general use */
+
 .header{
     -fx-font-size: 96px;
     -fx-font-weight: 300;
 }
 
-/* General field background, also used for input fields */
+/* used for input fields */
 .field-background{
-    -fx-background-color: #515050;
+    -fx-background-color: white;
+}
+
+/* Light gray text */
+.text-light-gray {
+    -fx-text-fill: #b0b0b0;
 }
 
 /* Link-like text styling */
@@ -178,7 +204,7 @@ ScrollPane > .viewport {
 
 /* --- Login Form Specific Styles (from initial HTML/CSS) --- */
 
-/* Corresponds to <div class="container--0-"> - The main rounded background panel */
+/* Corresponds to the main rounded background card */
 .container--0- {
     -fx-background-color: #CACACA;
     -fx-opacity: 0.92;
@@ -191,55 +217,3 @@ ScrollPane > .viewport {
      */
     -fx-effect: dropshadow(GAUSSIAN, rgba(0, 0, 0, 0.25), 5, 0, 0, 3.51201);
 }
-
-/* Corresponds to <div class="container-0-1-1"> and <div class="container-0-1-3"> */
-/* These are likely wrappers for input fields (e.g., email/password boxes). */
-.container-0-1-1,
-.container-0-1-3 {
-    /* You'll need to decide on layout properties in your FXML/Java code.
-     * These styles could be applied to a HBox, VBox, or StackPane that contains the input.
-     * Consider adding padding or alignment if needed, e.g.:
-     * -fx-padding: 5px;
-     * -fx-alignment: CENTER_LEFT;
-     */
-}
-
-/* Corresponds to <div class="container-1-2-2"> inside input field containers */
-/* This is likely the visual background for the text input area. */
-.container-1-2-2 {
-    -fx-background-color: white; /* Assuming this is the white background for the input */
-    -fx-background-radius: 5; /* Example radius for rounded input fields */
-    -fx-padding: 8px 10px; /* Padding inside the input area */
-}
-
-/* Corresponds to <div class="text-2-3-0"> - Placeholder text (e.g., "Enter Email") */
-/* This style can be applied to a Label inside your input field or a custom TextField. */
-.text-2-3-0 {
-    -fx-fill: #A0A0A0; /* Placeholder text color */
-    -fx-font-size: 14px; /* Font size for placeholder text */
-}
-
-/* Corresponds to <div class="text-0-1-2"> - "Forgot password?" text */
-/* Apply this to a Label or Hyperlink node. */
-.text-0-1-2 {
-    -fx-fill: #3366BB; /* Blue color for the link */
-    -fx-font-size: 12px;
-    -fx-underline: true; /* Underlines the text to indicate a link */
-}
-
-/* Corresponds to <div class="text-0-1-4"> - "Welcome Back!" heading */
-/* Apply this to a Label node. */
-.text-0-1-4 {
-    -fx-fill: #333333; /* Dark text color */
-    -fx-font-size: 24px; /* Larger font size */
-    -fx-font-weight: bold; /* Bold text */
-}
-
-/*
- * Note on SVG and Rectangles:
- * The original HTML included an SVG with a <rect> element.
- * In JavaFX, you typically won't style the raw SVG <rect> directly via CSS like this.
- * Instead, the properties of the main container (.container--0-)
- * (like background color, radius, and drop shadow) are applied to a JavaFX Node (e.g., a Pane or Region)
- * to achieve a similar visual effect as the SVG background.
- */
