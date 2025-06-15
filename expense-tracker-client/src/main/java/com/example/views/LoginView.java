@@ -1,5 +1,6 @@
 package com.example.views;
 
+import com.example.controllers.LoginController;
 import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
 
@@ -15,10 +16,12 @@ public class LoginView {
     private PasswordField passwordField = new PasswordField();
     private Button loginButton = new Button("Login");
     private Label signupLabel = new Label("Don't have an account?");
-    
+
     public void show(){
         Scene scene = createScene();
         scene.getStylesheets().add(getClass().getResource("/Style.css").toExternalForm());
+
+        new LoginController(this); // passing instance of this view
         ViewNavigator.switchViews(scene);
     }
 
@@ -69,4 +72,21 @@ public class LoginView {
         );
         return loginFormBox;
     }
+
+    public Label getWelcomebackLabel() { return welcomebackLabel; }
+    public void setWelcomebackLabel(Label welcomebackLabel) { this.welcomebackLabel = welcomebackLabel; }
+
+    public TextField getUsernameField() { return usernameField; }
+    public void setUsernameField(TextField usernameField) { this.usernameField = usernameField; }
+
+    public PasswordField getPasswordField() { return passwordField; }
+    public void setPasswordField(PasswordField passwordField) { this.passwordField = passwordField; }
+
+    public Button getLoginButton() { return loginButton; }
+    public void setLoginButton(Button loginButton) { this.loginButton = loginButton; }
+
+    public Label getSignupLabel() { return signupLabel; }
+    public void setSignupLabel(Label signupLabel) { this.signupLabel = signupLabel; }
+
+
 }

@@ -1,6 +1,5 @@
 module expense.tracker.client {
     requires javafx.controls;
-    requires javafx.graphics;
-    
+    requires com.google.gson;
     exports com.example;
 }
