@@ -1,4 +1,4 @@
-package com.entities;
+package com.example.expense_tracker_server.entities;
 
 import java.time.LocalDateTime;
 

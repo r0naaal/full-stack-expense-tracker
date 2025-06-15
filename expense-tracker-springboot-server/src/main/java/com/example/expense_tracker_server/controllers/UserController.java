@@ -1,7 +1,8 @@
-package com.controllers;
+package com.example.expense_tracker_server.controllers;
 
-import com.entities.User;
-import com.services.UserService;
+import com.example.expense_tracker_server.entities.User;
+import com.example.expense_tracker_server.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
