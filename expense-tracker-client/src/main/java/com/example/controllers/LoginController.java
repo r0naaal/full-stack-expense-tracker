@@ -1,5 +1,9 @@
 package com.example.controllers;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+
+import com.example.utils.ApiUtil;
 import com.example.views.LoginView;
 
 import javafx.event.EventHandler;
@@ -23,6 +27,22 @@ public class LoginController {
                 String password = loginView.getPasswordField().getText();
 
                 // authenticate 
+
+                HttpURLConnection connection = null;
+                try {
+                    connection = ApiUtil.fetchApi(
+                        "/api/v1/user/login?email=" + email + "&password=" + password,
+                        ApiUtil.RequestMethod.POST,null
+                    );
+
+                    if(connection.getResponseCode() != 200){
+                        System.out.println("Failed to authenticate");
+                    } else {
+                        System.out.println("Login Succesful");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 // see if email exists in data base
         
