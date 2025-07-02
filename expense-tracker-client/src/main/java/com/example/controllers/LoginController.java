@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 import com.example.utils.ApiUtil;
+import com.example.utils.Utilities;
 import com.example.views.LoginView;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 
 public class LoginController {
@@ -36,9 +38,11 @@ public class LoginController {
                     );
 
                     if(connection.getResponseCode() != 200){
-                        System.out.println("Failed to authenticate");
+                        // System.out.println("Failed to authenticate");
+                        Utilities.showAlertDialog(Alert.AlertType.ERROR, "Failed to authenticate.");
                     } else {
-                        System.out.println("Login Succesful");
+                        // System.out.println("Login Succesful");
+                        Utilities.showAlertDialog(Alert.AlertType.INFORMATION, "Login Succesful.");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

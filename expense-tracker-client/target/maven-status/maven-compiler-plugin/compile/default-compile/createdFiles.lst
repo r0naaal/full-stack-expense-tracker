@@ -1,9 +1,0 @@
-com\example\Main.class
-com\example\views\LoginView.class
-com\example\utils\ViewNavigator.class
-com\example\controllers\LoginController.class
-com\example\utils\ApiUtil.class
-module-info.class
-com\example\utils\Utilities.class
-com\example\controllers\LoginController$1.class
-com\example\utils\ApiUtil$RequestMethod.class
