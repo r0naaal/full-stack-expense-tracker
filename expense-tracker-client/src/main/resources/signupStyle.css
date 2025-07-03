@@ -1,0 +1,96 @@
+/* 
+   ================================
+        SIGNUP-SPECIFIC STYLES
+   ================================ 
+*/
+
+
+@import "Style.css"; /* Import base styles */
+
+/* Signup-specific button styling */
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #10b981, #059669);
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 16 32;
+    -fx-pref-height: 48;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to right, #059669, #10b981);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 4);
+}
+
+/* Signup-specific accent colors */
+.main-heading-accent {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #10b981;
+}
+
+.stat-number {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #10b981; 
+}
+
+/* Signup-specific feature icons */
+.feature-icon {
+    -fx-background-color: rgba(16, 185, 129, 0.1);
+    -fx-background-radius: 12;
+}
+
+.feature-icon:hover {
+    -fx-background-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Signup-specific form styling */
+.form-input:focused {
+    -fx-border-color: #10b981; /* Emerald green focus */
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.3), 4, 0, 0, 0);
+}
+
+.link-text {
+    -fx-text-fill: #10b981; /* Emerald green links */
+    -fx-cursor: hand;
+}
+
+.link-text:hover {
+    -fx-text-fill: #059669;
+    -fx-underline: true;
+}
+
+/* Signup-specific logo styling */
+.logo-icon {
+    -fx-background-color: linear-gradient(to bottom right, #10b981, rgba(16, 185, 129, 0.8));
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 4);
+}
+
+/* Signup-specific blur decorations */
+.blur-decoration-large {
+    -fx-background-color: rgba(16, 185, 129, 0.05);
+    -fx-background-radius: 50%;
+    -fx-effect: gaussianblur(32);
+    -fx-pref-width: 128;
+    -fx-pref-height: 128;
+}
+
+.blur-decoration-small {
+    -fx-background-color: rgba(16, 185, 129, 0.1);
+    -fx-background-radius: 50%;
+    -fx-effect: gaussianblur(20);
+    -fx-pref-width: 96;
+    -fx-pref-height: 96;
+}
+
+/* Form icon styling */
+.form-icon {
+    -fx-background-color: linear-gradient(to bottom right, #10b981, rgba(16, 185, 129, 0.8));
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 4);
+}

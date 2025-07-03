@@ -1,6 +1,7 @@
 package com.example.views;
 
 import com.example.controllers.LoginController;
+import com.example.utils.AuthPanelUtil;
 import com.example.utils.BrandingPanelUtil;
 import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
@@ -8,11 +9,7 @@ import com.example.utils.ViewNavigator;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
 public class LoginView {
     // create elements
@@ -36,78 +33,46 @@ public class LoginView {
     }
 
     private Scene createScene(){
-        // use BorderPane for reliable layout
-        BorderPane mainContainer = new BorderPane();
+        HBox mainContainer = new HBox();
         mainContainer.getStyleClass().add("main-container");
+        mainContainer.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        mainContainer.setMaxWidth(Double.MAX_VALUE);
         
         VBox leftPanel = BrandingPanelUtil.createBrandingPanel();
-        StackPane rightPanel = createAuthPanel();
+        StackPane rightPanel = AuthPanelUtil.createAuthPanel(createAuthCard());
         
-        // set as left and right regions
-        mainContainer.setLeft(leftPanel);
-        mainContainer.setRight(rightPanel);
+        HBox.setHgrow(leftPanel, Priority.ALWAYS);
+        HBox.setHgrow(rightPanel, Priority.ALWAYS);
+        leftPanel.setPrefWidth(Utilities.APP_WIDTH / 2.0);
+        rightPanel.setPrefWidth(Utilities.APP_WIDTH / 2.0);
         
-        // ensure equal width distribution
-        leftPanel.prefWidthProperty().bind(mainContainer.widthProperty().divide(2));
-        rightPanel.prefWidthProperty().bind(mainContainer.widthProperty().divide(2));
-        
+        mainContainer.getChildren().addAll(leftPanel, rightPanel);
         return new Scene(mainContainer, Utilities.APP_WIDTH, Utilities.APP_HEIGTH); 
     }
 
-    private StackPane createAuthPanel() {
-        StackPane authPanel = new StackPane();
-        authPanel.getStyleClass().add("auth-panel");
-        
-        VBox authCard = createAuthCard();
-        authPanel.getChildren().add(authCard);
-
-        return authPanel;
-    }
-
     private VBox createAuthCard() {
-        VBox authCard = new VBox(32);
-        authCard.getStyleClass().add("auth-card");
-        authCard.setMaxWidth(480);
-        authCard.setAlignment(Pos.CENTER);
+        VBox authCard = AuthPanelUtil.createBaseAuthCard();
         
         // form header
-        VBox formHeader = createFormHeader();
+        VBox formHeader = AuthPanelUtil.createFormHeader("👤", "Welcome back", "Sign in to continue managing your finances");
         
         // form fields
         VBox formFields = createFormFields();
         
         // social login section
-        VBox socialSection = createSocialSection();
+        VBox socialSection = AuthPanelUtil.createSocialSection(googleButton, githubButton, "Or continue with");
         
         // switch to signup
-        HBox switchSection = createSwitchSection();
+        HBox switchSection = AuthPanelUtil.createSwitchSection(signupLabel, signupLink);
         
-        authCard.getChildren().addAll(formHeader, formFields, socialSection, switchSection);
+        authCard.getChildren().addAll(
+            formHeader,
+            formFields,
+            socialSection,
+            switchSection
+        );
+
         return authCard;
-
-    }
-
-    private VBox createFormHeader() {
-        VBox formHeader = new VBox(12);
-        formHeader.getStyleClass().add("form-header");
-        formHeader.setAlignment(Pos.CENTER);
-        
-        // form icon
-        StackPane formIcon = new StackPane();
-        formIcon.getStyleClass().add("form-icon");
-        formIcon.setPrefSize(64, 64);
-        
-        Label userIcon = new Label("👤");
-        userIcon.setStyle("-fx-font-size: 32px;");
-        formIcon.getChildren().add(userIcon);
-        
-        welcomebackLabel.getStyleClass().add("form-title");
-        
-        Label subtitle = new Label("Sign in to continue managing your finances");
-        subtitle.getStyleClass().add("form-subtitle");
-        
-        formHeader.getChildren().addAll(formIcon, welcomebackLabel, subtitle);
-        return formHeader;
     }
 
     private VBox createFormFields() {
@@ -115,30 +80,10 @@ public class LoginView {
         formFields.getStyleClass().add("form-container");
 
         // username field
-        VBox usernameGroup = new VBox(8);
-        usernameGroup.getStyleClass().add("input-group");
-
-        Label usernameLabel = new Label("Email");
-        usernameLabel.getStyleClass().add("field-label");
-
-        usernameField.setPromptText("Enter your email");
-        usernameField.getStyleClass().clear();
-        usernameField.getStyleClass().add("form-input");
-
-        usernameGroup.getChildren().addAll(usernameLabel, usernameField);
+        VBox usernameGroup = AuthPanelUtil.createInputGroup("Email", usernameField, "Enter your email");
 
         // password field
-        VBox passwordGroup = new VBox(8);
-        passwordGroup.getStyleClass().add("input-group");
-        
-        Label passwordLabel = new Label("Password");
-        passwordLabel.getStyleClass().add("field-label");
-        
-        passwordField.setPromptText("Enter your password");
-        passwordField.getStyleClass().clear();
-        passwordField.getStyleClass().add("form-input");
-        
-        passwordGroup.getChildren().addAll(passwordLabel, passwordField);
+        VBox passwordGroup = AuthPanelUtil.createInputGroup("Password", passwordField, "Enter your password");
 
         // remember me and forgot password
         HBox optionsRow = new HBox();
@@ -163,59 +108,6 @@ public class LoginView {
 
         formFields.getChildren().addAll(usernameGroup, passwordGroup, optionsRow, loginButton);
         return formFields;
-        
-    }
-
-    private VBox createSocialSection() {
-        VBox socialSection = new VBox(16);
-        
-        // divider
-        HBox dividerSection = new HBox(16);
-        dividerSection.setAlignment(Pos.CENTER);
-        dividerSection.getStyleClass().add("divider-container");
-        
-        Line leftLine = new Line();
-        leftLine.getStyleClass().add("divider-line");
-        leftLine.setEndX(100);
-        
-        Label dividerText = new Label("Or continue with");
-        dividerText.getStyleClass().add("divider-text");
-        
-        Line rightLine = new Line();
-        rightLine.getStyleClass().add("divider-line");
-        rightLine.setEndX(100);
-        
-        dividerSection.getChildren().addAll(leftLine, dividerText, rightLine);
-        
-        // social buttons
-        HBox socialButtons = new HBox(16);
-        socialButtons.getStyleClass().add("social-buttons");
-        
-        googleButton.getStyleClass().add("social-button");
-        googleButton.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(googleButton, Priority.ALWAYS);
-        
-        githubButton.getStyleClass().add("social-button");
-        githubButton.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(githubButton, Priority.ALWAYS);
-        
-        socialButtons.getChildren().addAll(googleButton, githubButton);
-        
-        socialSection.getChildren().addAll(dividerSection, socialButtons);
-        return socialSection;
-    }
-
-    private HBox createSwitchSection() {
-        HBox switchSection = new HBox(8);
-        switchSection.setAlignment(Pos.CENTER);
-
-        signupLabel.getStyleClass().clear();
-        signupLabel.getStyleClass().add("switch-form-text");
-
-        signupLink.getStyleClass().add("link-text");
-
-        switchSection.getChildren().addAll(signupLabel, signupLink);
-        return switchSection;
     }
 
     public Label getWelcomebackLabel() { return welcomebackLabel; }
