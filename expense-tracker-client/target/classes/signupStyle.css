@@ -12,12 +12,13 @@
     -fx-background-color: linear-gradient(to right, #10b981, #059669);
     -fx-background-radius: 8;
     -fx-text-fill: white;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-padding: 16 32;
-    -fx-pref-height: 48;
+    -fx-padding: 12 24;
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
 }
 
 .primary-button:hover {
@@ -75,7 +76,6 @@
 .blur-decoration-large {
     -fx-background-color: rgba(16, 185, 129, 0.05);
     -fx-background-radius: 50%;
-    -fx-effect: gaussianblur(32);
     -fx-pref-width: 128;
     -fx-pref-height: 128;
 }
@@ -83,14 +83,108 @@
 .blur-decoration-small {
     -fx-background-color: rgba(16, 185, 129, 0.1);
     -fx-background-radius: 50%;
-    -fx-effect: gaussianblur(20);
     -fx-pref-width: 96;
     -fx-pref-height: 96;
 }
 
-/* Form icon styling */
-.form-icon {
-    -fx-background-color: linear-gradient(to bottom right, #10b981, rgba(16, 185, 129, 0.8));
+.auth-panel {
+    -fx-pref-width: 50%;
+    -fx-alignment: center;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-max-height: 800;
+    -fx-min-height: 0;
+}
+
+.auth-card {
+    -fx-background-color: white;
     -fx-background-radius: 16;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 4);
+    -fx-border-color: rgba(218, 224, 231, 0.5);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-padding: 24; 
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.05), 20, 0, 0, 8);
+    -fx-max-width: 480;
+    -fx-alignment: top-center;
+    -fx-max-height: 700;
+    -fx-min-height: 0;
+}
+
+.form-container {
+    -fx-spacing: 16;
+}
+
+.divider-container {
+    -fx-spacing: 12px;
+    -fx-alignment: center;
+}
+
+.divider-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64728b;
+    -fx-background-color: white;
+    -fx-padding: 0 12px 0 12px;
+}
+
+.form-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #171d26;
+}
+
+.form-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #64728b;
+}
+
+.form-icon {
+    -fx-background-color: linear-gradient(to bottom right, #24c25e, rgba(36, 194, 94, 0.8));
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.form-input {
+    -fx-background-color: rgba(210, 220, 234, 0.4);
+    -fx-background-radius: 6;
+    -fx-border-color: #dae0e7;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 10 16; 
+    -fx-font-size: 14px;
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
+}
+
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #24c25e, #1ea553);
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 16px; 
+    -fx-font-weight: bold;
+    -fx-padding: 12 24; 
+    -fx-pref-height: 40; 
+    -fx-max-height: 40;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
+}
+
+.social-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #dae0e7;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #171d26;
+    -fx-font-size: 14px;
+    -fx-padding: 10 16;
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.divider-line {
+    -fx-background-color: #dae0e7;
+    -fx-pref-height: 1px;
+    -fx-max-height: 1px;
+    -fx-min-height: 1px;
 }

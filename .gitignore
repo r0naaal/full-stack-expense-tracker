@@ -1,1 +1,3 @@
 expense-tracker-springboot-server/src/main/resources/application.properties
+CLAUDE.md
+Expense Tracker Flowchart.png

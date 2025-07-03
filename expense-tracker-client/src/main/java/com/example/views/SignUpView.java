@@ -1,6 +1,6 @@
 package com.example.views;
 
-import com.example.controllers.LoginController;
+import com.example.controllers.SignUpController;
 import com.example.utils.AuthPanelUtil;
 import com.example.utils.BrandingPanelUtil;
 import com.example.utils.Utilities;
@@ -16,7 +16,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -39,23 +38,23 @@ public class SignUpView {
         Scene scene = createScene();
         scene.getStylesheets().add(getClass().getResource("/signupStyle.css").toExternalForm());
 
+        new SignUpController(this); // pass current view
         ViewNavigator.switchViews(scene);
     }
 
     private Scene createScene(){
         HBox mainContainer = new HBox();
         mainContainer.getStyleClass().add("main-container");
-        mainContainer.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        mainContainer.setMaxWidth(Double.MAX_VALUE);
-
         VBox leftPanel = BrandingPanelUtil.createBrandingPanel();
         StackPane rightPanel = AuthPanelUtil.createAuthPanel(createAuthCard());
-
+        leftPanel.prefWidthProperty().bind(mainContainer.widthProperty().multiply(0.5));
+        rightPanel.prefWidthProperty().bind(mainContainer.widthProperty().multiply(0.5));
+        leftPanel.setMinWidth(0);
+        leftPanel.setMaxWidth(Double.MAX_VALUE);
+        rightPanel.setMinWidth(0);
+        rightPanel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(leftPanel, Priority.ALWAYS);
         HBox.setHgrow(rightPanel, Priority.ALWAYS);
-        leftPanel.setPrefWidth(Utilities.APP_WIDTH / 2.0);
-        rightPanel.setPrefWidth(Utilities.APP_WIDTH / 2.0);
-
         mainContainer.getChildren().addAll(leftPanel, rightPanel);
         return new Scene(mainContainer, Utilities.APP_WIDTH, Utilities.APP_HEIGTH);
     }
@@ -86,7 +85,7 @@ public class SignUpView {
     }
     
     private VBox createFormFields() {
-        VBox formFields = new VBox(24);
+        VBox formFields = new VBox(12);
         formFields.getStyleClass().add("form-container");
 
         // name fields (side by side)
@@ -104,7 +103,7 @@ public class SignUpView {
         VBox confirmPasswordGroup = AuthPanelUtil.createInputGroup("Confirm Password", confirmPasswordField, "Confirm your password");
 
         // terms checkbox
-        HBox termsRow = new HBox(8);
+        HBox termsRow = new HBox(6);
         termsRow.setAlignment(Pos.CENTER_LEFT);
 
         termsCheckBox.getStyleClass().add("checkbox-container");

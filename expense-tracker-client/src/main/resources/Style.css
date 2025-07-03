@@ -28,6 +28,7 @@ GridPane {
 /* Main Layout */
 .main-container {
     -fx-background-color: linear-gradient(to bottom right, #fafafa, rgba(228, 241, 233, 0.3), rgba(240, 244, 242, 0.2));
+    -fx-pref-width: 100%;
 }
 
 .branding-panel {
@@ -35,12 +36,15 @@ GridPane {
     -fx-border-color: rgba(218, 224, 231, 0.5);
     -fx-border-width: 0 1 0 0;
     -fx-pref-width: 50%;
+    -fx-min-width: 0;
 }
 
 .auth-panel {
     -fx-pref-width: 50%;
     -fx-alignment: center;
     -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-max-height: 800;
+    -fx-min-height: 0;
 }
 
 .auth-card {
@@ -49,8 +53,12 @@ GridPane {
     -fx-border-color: rgba(218, 224, 231, 0.5);
     -fx-border-width: 1;
     -fx-border-radius: 16;
-    -fx-padding: 40;
+    -fx-padding: 24; 
     -fx-effect: dropshadow(gaussian, rgba(36, 194, 94, 0.05), 20, 0, 0, 8);
+    -fx-max-width: 480;
+    -fx-alignment: top-center;
+    -fx-max-height: 700;
+    -fx-min-height: 0;
 }
 
 /* Logo and Branding */
@@ -92,14 +100,20 @@ GridPane {
 
 /* Form Elements */
 .form-title {
-    -fx-font-size: 32px;
+    -fx-font-size: 28px; 
     -fx-font-weight: bold;
     -fx-text-fill: #171d26;
 }
 
 .form-subtitle {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px; 
     -fx-text-fill: #64728b;
+}
+
+.form-icon {
+    -fx-background-color: linear-gradient(to bottom right, #24c25e, rgba(36, 194, 94, 0.8));
+    -fx-background-radius: 12; 
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
 }
 
 .form-input {
@@ -108,9 +122,10 @@ GridPane {
     -fx-border-color: #dae0e7;
     -fx-border-radius: 6;
     -fx-border-width: 1;
-    -fx-padding: 12 16;
-    -fx-font-size: 16px;
-    -fx-pref-height: 44;
+    -fx-padding: 10 16; 
+    -fx-font-size: 14px; 
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
 }
 
 .form-input:focused {
@@ -122,12 +137,13 @@ GridPane {
     -fx-background-color: linear-gradient(to right, #24c25e, #1ea553);
     -fx-background-radius: 8;
     -fx-text-fill: white;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px; 
     -fx-font-weight: bold;
-    -fx-padding: 16 32;
-    -fx-pref-height: 48;
+    -fx-padding: 12 24; 
+    -fx-pref-height: 40; 
+    -fx-max-height: 40;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
 }
 
 .primary-button:hover {
@@ -137,12 +153,16 @@ GridPane {
 .social-button {
     -fx-background-color: transparent;
     -fx-border-color: #dae0e7;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-padding: 16 24;
-    -fx-pref-height: 48;
+    -fx-text-fill: #171d26;
+    -fx-font-size: 14px;
+    -fx-padding: 10 16;
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
     -fx-cursor: hand;
+    -fx-alignment: center;
 }
 
 .social-button:hover {
@@ -186,4 +206,27 @@ GridPane {
     -fx-font-size: 14px;
     -fx-font-weight: 500;
     -fx-text-fill: #171d26;
+}
+
+.divider-line {
+    -fx-background-color: #dae0e7;
+    -fx-pref-height: 1px;
+    -fx-max-height: 1px;
+    -fx-min-height: 1px;
+}
+
+.form-container {
+    -fx-spacing: 16;
+}
+
+.divider-container {
+    -fx-spacing: 12px;
+    -fx-alignment: center;
+}
+
+.divider-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64728b;
+    -fx-background-color: white;
+    -fx-padding: 0 12px 0 12px;
 }

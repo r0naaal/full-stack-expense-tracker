@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import com.example.utils.ApiUtil;
 import com.example.utils.Utilities;
 import com.example.views.LoginView;
+import com.example.views.SignUpView;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -57,6 +58,15 @@ public class LoginController {
                 // if not the correct password output credentials not valid
 
             }
+        });
+    
+        loginView.getSignupLink().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                new SignUpView().show();
+            }
+            
         });
     }
 
