@@ -1,5 +1,6 @@
 package com.example.expense_tracker_server.services;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    // getters
     public Optional<User> getUserById(int userId){
         logger.info("Getting the user by id: " + userId);
         return userRepository.findById(userId);
@@ -30,4 +32,14 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     
+    // post
+    public User createUser(String firstName, String lastName, String email, String password){
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setCreatedAt(LocalDateTime.now());
+        return userRepository.save(user); // saves user into the db
+    }
 }

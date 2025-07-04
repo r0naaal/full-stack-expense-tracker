@@ -58,4 +58,18 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        logger.info("Creating new User");
+        User newUser = userService.createUser(
+            user.getFirstName(),
+            user.getLastName(), 
+            user.getEmail(),
+            user.getPassword()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(newUser); // send new user
+    }
+
 }

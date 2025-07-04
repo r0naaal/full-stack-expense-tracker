@@ -2,6 +2,8 @@ package com.example.expense_tracker_server.entities;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 @Entity // marks class as JPA entity which means that it will be mapped to the user table in the db
 @Table(name = "user") // labels this entity to the proper name
@@ -11,8 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-incrementing primary key
     private Integer id;
 
-    @Column(name = "name") // maps this field to the name column in the user table
-    private String name;
+    @JsonProperty("first_name")
+    @Column(name = "first_name") // maps this field to the name column in the user table
+    private String firstName;
+
+    @JsonProperty("last_name")
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "email") // maps this field to the email column in the user table
     private String email;
@@ -25,13 +32,15 @@ public class User {
 
     // Getters
     public Integer getId() { return id; }
-    public String getName() { return name; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     
     // Setters
-    public void setName(String name) { this.name = name; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
     public void setEmail(String email) { this.email = email; }
     public void setPassword(String password) { this.password = password; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
