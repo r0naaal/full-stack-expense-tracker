@@ -45,7 +45,6 @@ public class ApiUtil {
                 }
             }
 
-
             return connection;
         } catch (IOException e) {
             e.printStackTrace();

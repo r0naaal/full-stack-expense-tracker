@@ -1,3 +1,6 @@
 expense-tracker-springboot-server/src/main/resources/application.properties
 CLAUDE.md
 Expense Tracker Flowchart.png
+expense-tracker-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+.gitignore
+expense-tracker-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst

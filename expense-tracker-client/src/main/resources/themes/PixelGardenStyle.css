@@ -1,0 +1,596 @@
+/* ==================== DEFAULT THEME: PIXEL GARDEN ==================== */
+
+/* ==================== MAIN BACKGROUNDS ==================== */
+.root, .main-container, .content-area, .default-branding-column {
+    -fx-background-color: #fcebff; /* f5fcf5 Light pastel green */
+}
+
+.default-top-bar {
+    -fx-background-color: #fae0ff; /* c8e6c9 Soft pastel green */
+    -fx-border-color: #f7c6fd; /* Slightly darker green */
+    -fx-border-width: 1;
+}
+
+/* ==================== TEXT COLORS ==================== */
+.label {
+    -fx-text-fill: #e995dc; /* Darker green */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+}
+
+.form-title {
+    -fx-text-fill:#e995dc; 
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+}
+
+.form-subtitle {
+    -fx-text-fill: #f8c1f0; /* Soft green */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+}
+
+.form-icon {
+    -fx-font-size: 26px;
+    -fx-text-fill: #f5edf7; /* Light pastel lavender */
+    -fx-background-color: #f6cbff; /* Light lavender */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: -1 4 -1 4; 
+    -fx-effect: null; 
+}
+
+/* ==================== APP NAME ==================== */
+.cozy-mode-badge {
+    -fx-text-fill: #efe4ff;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+    -fx-letter-spacing: 1px;
+    -fx-background-color: #f6cbff; /* Very light lavender */
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 32;
+    -fx-border-radius: 32;
+    -fx-alignment: center;
+}
+
+.cozy-mode-badge:hover {
+    -fx-background-color: #e1d9f1; /* Light lavender on hover */
+}
+
+.main-icon {
+    -fx-font-size: 26px;
+    -fx-text-fill: #f3e5f5; /* Light pastel lavender */
+    -fx-background-color: #f6cbff; /* Light lavender */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: -1 8 -1 8; 
+    -fx-alignment: center;
+    -fx-effect: null;
+}
+
+.logo-text {
+    -fx-text-fill: #cf8dc5;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 1px;
+}
+
+/* ==================== MAIN HEADINGS ==================== */
+.main-heading {
+    -fx-text-fill: #e995dc;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 36px;
+    -fx-font-weight: 900;
+    -fx-padding: 0 0 -10 0; 
+    -fx-letter-spacing: 2px;
+}
+
+.default-accent-heading {
+    -fx-text-fill: #dda8d5; 
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 28px;
+    -fx-font-weight: 900;
+    -fx-padding: 0 0 15 0; 
+}
+
+.description-text {
+    -fx-text-fill: #e0acd8; /* Dark lavender */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 18px;
+    -fx-letter-spacing: 2px;
+}
+
+.default-field-label {
+    -fx-text-fill: #755c8a; /* Darker green */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+.hint-text {
+    -fx-text-fill: #916c94; /* Soft beige */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+    -fx-font-style: italic;
+}
+
+/* ==================== PRIMARY BUTTONS ==================== */
+.default-primary-button {
+    -fx-background-color: #e995dc; 
+    -fx-text-fill: #f4f0f5; 
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-effect: null;
+    -fx-cursor: hand;
+}
+
+.default-primary-button:hover {
+    -fx-background-color: #e0a6d8; /* Darker green on hover */
+}
+
+.default-primary-button:pressed {
+    -fx-background-color: #9d6dac; /* Even darker green */
+    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-effect: null;
+}
+
+.default-primary-button:disabled {
+    -fx-background-color: #9d6dac; /* Soft gray */
+    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-opacity: 0.6;
+}
+
+/* ==================== MODE TOGGLE ==================== */
+.mode-toggle {
+    -fx-background-color: #ddd3f0; /* Light pastel green */
+    -fx-border-color: transparent;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+
+.mode-toggle-button {
+    -fx-background-color: #ddd3f0;
+    -fx-text-fill: #8e6ca1; 
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 10;    
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-effect: null;
+    -fx-transition: all 0.2s;
+}
+
+.mode-toggle-button:hover {
+    -fx-background-color: #c7b4e9; /* Light lavender on hover */
+    -fx-border-color: #c6b2d1;
+}
+
+.mode-toggle-button.selected {
+    -fx-background-color: #e995dc; /* Soft green when selected */
+    -fx-text-fill: #f4f0f5; /* Light text */
+    -fx-border-color: #d6ccdf;
+}
+
+/* ==================== INPUT FIELDS ==================== */
+.default-text-field, .default-password-field {
+    -fx-background-color: #f7eef7; /* Light background */
+    -fx-border-color: #d4c7d9; /* Soft gray */
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 8 12 8 30;
+    -fx-font-size: 16px;
+    -fx-text-fill: #4d324d; /* Darker text */
+    -fx-font-weight: 400;
+    -fx-prompt-text-fill: #916c94; /* Soft brown */
+    -fx-effect: null;
+}
+
+.default-text-field:focused, .default-password-field:focused {
+    -fx-border-color: #ac8eac, #bb669a;
+    -fx-border-width: 1, 2;             
+    -fx-border-insets: 0, -4;           
+    -fx-border-radius: 12, 16;
+    -fx-background-color: #f1e6f1;
+    -fx-font-size: 16px;
+    -fx-text-fill: #4e2e3e; 
+    -fx-font-weight: 400;
+    -fx-prompt-text-fill: #ab8eac;
+}
+
+/* ==================== AUTH CARD ==================== */
+.default-auth-card {
+    -fx-background-color: #fae0ff; /* Light beige */
+    -fx-border-color: #f7c6fd;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+} 
+
+/* ==================== FEATURE CARDS ==================== */
+.default-feature-card {
+    -fx-background-color: #fae0ff;
+    -fx-border-color: #f7c6fd;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+}
+
+.default-feature-card-emoji {
+    -fx-font-size: 20px;
+    -fx-text-fill: #e995dc;
+    -fx-padding: 0 0 0 8; 
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+    -fx-alignment: center;
+}
+
+.default-feature-card-title {
+    -fx-text-fill: #e995dc; /* Darker green */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 400;
+    -fx-padding: 2 0 0 0;
+}
+
+.default-feature-card-description {
+    -fx-text-fill: #e0acd8; /* Soft beige */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: 100;
+}
+
+/* ==================== SIDEBAR ==================== */
+.default-sidebar {
+    -fx-background-color: #fae0ff; /* Light beige */
+    -fx-border-color: #f7c6fd; /* Soft gray */
+}
+
+.sidebar-logo-icon {
+    -fx-font-size: 25px;
+    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-padding: 0 8 0 8; 
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #f6cbff; /* Soft green */
+}
+
+.sidebar-title {
+    -fx-text-fill: #6b5647; /* Dark brown */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-background-color: transparent;
+    -fx-text-spacing: 2px;
+}
+
+.sidebar-toggle-button {
+    -fx-background-color: #fae0ff;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-padding: 4 12 4 12;
+    -fx-effect: null;
+    -fx-alignment: center;
+}
+
+.sidebar-toggle-button:hover {
+    -fx-background-color: #e9d9ec;
+    -fx-border-color: transparent;
+}
+
+.sidebar-toggle-button:focused {
+    -fx-background-color: #dfd1e2; 
+    -fx-border-color: transparent;
+}
+
+.sidebar-toggle-icon {
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;   
+    -fx-text-fill: #6b4766;
+    -fx-alignment: center;
+}
+
+.sidebar-navigation {
+    -fx-background-color: #fae0ff; 
+    -fx-border-color: #f7c6fd;
+    -fx-border-width: 1 0 1 1;
+}
+
+.sidebar-nav-button {
+    -fx-background-color: #fae0ff;
+    -fx-border-color: #f7c6fd;
+    -fx-border-width: 1; 
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.sidebar-nav-button:hover {
+    -fx-background-color: #dfc7e0;
+}
+
+.sidebar-nav-button:pressed {
+    -fx-background-color: #dfc7e0;
+}
+
+.sidebar-nav-button.sidebar-nav-button-active {
+    -fx-background-color: #dfc7e0;
+}
+
+.sidebar-nav-button-text {
+    -fx-text-fill: #4b324d; /* Darker text */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 400;
+}
+
+.sidebar-footer {
+    -fx-background-color: #fae0ff;
+    -fx-border-color: #f7c6fd; 
+    -fx-border-width: 1 1 0 1; 
+    -fx-min-height: 64px;
+    -fx-pref-height: 64px;
+    -fx-max-height: 64px;
+}
+
+.footer-text {
+    -fx-text-fill: #947893a9; /* Soft gray */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 18px; 
+    -fx-font-weight: 900; 
+    -fx-alignment: CENTER;
+    -fx-padding: 4;
+}
+
+.footer-icon {
+    -fx-font-size: 30px; 
+    -fx-text-fill: #927894; /* Soft gray */
+    -fx-text-weight: 600;
+    -fx-alignment: CENTER; 
+}
+
+/* ==================== THEME PICKER CARD ==================== */
+.theme-picker-card {
+    -fx-background-color: #fae0ff; /* Light beige */
+    -fx-border-color: #f7c6fd; /* Soft gray */
+    -fx-border-width: 1;
+    -fx-background-radius: 22;
+    -fx-border-radius: 22;
+    -fx-padding: 18 18 18 18;
+    -fx-effect: null;
+}
+
+.theme-picker-text, .theme-picker-text-icon {
+    -fx-text-fill: #f6cbff; /* Darker green */
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+.theme-picker-text-icon {
+    -fx-font-size: 20px;
+    -fx-padding: 0 8 0 0;
+}
+
+.theme-picker-option {
+    -fx-background-color: #fae0ff; /* Light background */
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: #f7c6fd; /* Soft gray */
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+    -fx-effect: null;
+    -fx-min-width: 220px;
+    -fx-pref-width: 270px;
+}
+
+.theme-picker-option:hover {
+    -fx-background-color: #ecd8f0; /* Light gray on hover */
+    -fx-effect: null;
+}
+
+.theme-picker-option:pressed {
+    -fx-background-color: #d8c0d8; /* Soft gray */
+    -fx-border-width: 0;
+    -fx-effect: null;
+}
+
+.theme-picker-option.theme-picker-option-active {
+    -fx-background-color: #e995dc; /* Soft green */
+    -fx-effect: null;
+}
+
+.theme-picker-option .theme-option-name {
+    -fx-text-fill: #8a5c80; /* Darker green */
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+.theme-picker-option.theme-picker-option-active .theme-option-name {
+    -fx-text-fill: #f5edf5; /* Light text */
+}
+
+.theme-picker-option .theme-option-desc {
+    -fx-text-fill: #766278; /* Soft gray */
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+.theme-picker-option.theme-picker-option-active .theme-option-desc {
+    -fx-text-fill: #f5edf5; /* Light text */
+}
+
+.theme-picker-active-badge {
+    -fx-border-color: #f7c6fd; /* Soft gray */
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 12 0 0 0;
+    -fx-background-color: transparent;
+}
+
+.theme-picker-scroll-hidden-bar {
+    -fx-background-color: #fae0ff; 
+}
+
+.theme-picker-scroll-hidden-bar .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-padding: 0;
+    -fx-background-color: #fae0ff;
+}
+
+.theme-picker-scroll-hidden-bar .thumb,
+.theme-picker-scroll-hidden-bar .track,
+.theme-picker-scroll-hidden-bar .increment-button,
+.theme-picker-scroll-hidden-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-padding: 0;
+    -fx-background-color: #fae0ff;
+}
+
+.theme-picker-scroll-hidden-bar .viewport {
+    -fx-background-color: #fae0ff; 
+}
+
+/* ================== PREVIEW CARD =================== */
+.preview-card {
+    -fx-background-color: #faddfa;
+    -fx-border-color: #f7c6fd; 
+    -fx-border-width: 0 1 1 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-max-width: 300; /* Set a maximum width */
+}
+
+.preview-card-header {
+    -fx-text-fill: #e995dc; 
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 900;
+}
+
+.preview-card-item {
+    -fx-background-color: #f8e4f8;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+    -fx-max-width: 280; /* Set a maximum width */
+    -fx-max-height: 60; /* Set a maximum height */
+}
+
+.preview-card-item:hover {
+    -fx-background-color: #f0dcf7; /* Light gray on hover */
+}
+
+.preview-card-icon {
+    -fx-font-size: 18px;
+    -fx-text-fill: #7f5c8a; /* Darker green */
+    -fx-padding: 0 8 0 0; 
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+}
+
+.preview-card-title {
+    -fx-text-fill: #e78fda; /* Darker green */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+.preview-card-description {
+    -fx-text-fill: #e0acd8; /* Soft beige */
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: 100;
+}
+
+/* ==================== DEBUG STYLES ==================== */
+.debug-border {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+}
+.p-debug-border {
+    -fx-border-color: purple;
+    -fx-border-width: 2px;
+}
+
+.b-debug-border {
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+/* (Add your animation rules here) */
+
+/* ==================== ICONS ==================== */
+.input-emoji-inside-left {
+    -fx-font-size: 18px;
+    -fx-text-fill: #e995dc; /* Soft gray */
+    -fx-padding: 0 0 0 8; 
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+} 
+
+.input-emoji-inside-right {
+    -fx-font-size: 16px;
+    -fx-text-fill: #e995dc; /* Soft gray */
+    -fx-padding: 0 8 0 0;
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+}
+
+/* ==================== CHECKBOXES ==================== */
+.default-checkbox > .box {
+    -fx-background-color: #f9f0fd; /* Light pastel green */
+    -fx-border-color: #f1d1ff; /* Soft green */
+    -fx-border-width: 2;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-padding: 4;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+    -fx-alignment: center;
+    -fx-mark-color: #f1d1ff; /* Accent color for checkmark when unchecked */
+    -fx-mark-width: 3px; /* Make checkmark thicker */
+    -fx-mark-height: 12px; /* Make checkmark larger */
+}
+
+.default-checkbox:selected > .box,
+.default-checkbox:pressed > .box {
+    -fx-background-color: #efc8ff; /* Soft green when checked */
+    -fx-border-color: #ecc1ff; /* Soft green border when checked */
+    -fx-mark-color: #f6f0f8; /* Light checkmark when checked */
+}
+
+.default-checkbox .text {
+    -fx-text-fill: #eabaff; /* Darker green */
+    -fx-font-size: 15px;
+    -fx-font-weight: 500;
+    -fx-padding: 0 0 0 8;
+}
