@@ -14,10 +14,13 @@ import javafx.util.Duration;
 
 public class SidebarUtil {
 
-    private static AuthView colorController = new AuthView();
+    public enum SidebarType {
+        AUTH_VIEW,
+        DASHBOARD_VIEW
+    }
     
-    private static boolean sidebarExpanded = false; // start closed
-    private static boolean themePickerVisible = false; // only visible when sidebar is expanded
+    private static boolean sidebarExpanded = false;
+    private static boolean themePickerVisible = false;
     
     private static VBox currentSidebar;
     private static Label toggleIcon;
@@ -31,19 +34,36 @@ public class SidebarUtil {
     private static HBox logoSection;
 
     private static Button[] themeButtons = new Button[7];
-    private static int currentActiveIndex = 1; // track which button is currently active
+    private static int currentActiveIndex = 0;
+
+    // Dashboard-specific navigation buttons
+    private static Button dashboardBtn;
+    private static Button reportsBtn;
+    private static Button goalsBtn;
+    private static Button logoutBtn;
+
+    // Current sidebar type
+    private static SidebarType currentSidebarType = SidebarType.AUTH_VIEW;
+
+    // Callback interfaces for navigation actions
+    public interface NavigationCallback {
+        void onNavigate(String destination);
+    }
+
+    private static NavigationCallback navigationCallback;
+
+    // Set the navigation callback for dashboard actions
+    public static void setNavigationCallback(NavigationCallback callback) {
+        navigationCallback = callback;
+    }
 
     private static void changeTheme(String themeName){
-        if(colorController == null) return;
-        System.out.println("Changing theme to: " + themeName);
-        colorController.switchTheme(themeName); 
-
-        //if (currentThemeOption != null){ 
-        //  currentThemeOption.getStyleClass().add("theme-picker-option-active");
-        //}
+        ThemeManager.getInstance().setCurrentTheme(themeName);
     }
     
-    public static VBox createSidebar() {
+    public static VBox createSidebar(SidebarType sidebarType) {
+        currentSidebarType = sidebarType;
+        
         VBox sidebar = new VBox();
         sidebar.setPrefWidth(sidebarExpanded ? 320 : 64);
         sidebar.setMinWidth(64);
@@ -51,7 +71,7 @@ public class SidebarUtil {
         currentSidebar = sidebar;
         
         HBox header = createSidebarHeader();
-        VBox navigation = createSidebarNavigation();
+        VBox navigation = createSidebarNavigation(sidebarType);
 
         themePickerBox = createThemePickerBox();
         themePickerBox.setVisible(true);
@@ -61,17 +81,15 @@ public class SidebarUtil {
         themePickerScrollPane.setFitToWidth(true);
         themePickerScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         themePickerScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        themePickerScrollPane.setMaxHeight(0); // Start collapsed
+        themePickerScrollPane.setMaxHeight(0);
         themePickerScrollPane.setMinHeight(0);
         themePickerScrollPane.setPrefHeight(0);
         themePickerScrollPane.setVisible(false);
         themePickerScrollPane.setManaged(false);
         themePickerScrollPane.getStyleClass().add("theme-picker-scroll-hidden-bar");
 
-        featuresPreview = createFeaturesPreview();
-        featuresPreview.setPadding(new Insets(0, 0, 0, 0));
-        featuresPreview.setVisible(sidebarExpanded);
-        featuresPreview.setManaged(sidebarExpanded);
+        // Create appropriate content based on sidebar type
+        VBox contentSection = createContentSection(sidebarType);
 
         VBox footer = createSidebarFooter();
 
@@ -79,8 +97,29 @@ public class SidebarUtil {
         VBox.setVgrow(spacer, Priority.ALWAYS);
         
         sidebar.getStyleClass().add("default-sidebar");
-        sidebar.getChildren().addAll(header, navigation, themePickerScrollPane, featuresPreview, spacer, footer);
+        sidebar.getChildren().addAll(header, navigation, themePickerScrollPane, contentSection, spacer, footer);
         return sidebar;
+    }
+
+    private static VBox createContentSection(SidebarType sidebarType) {
+        VBox contentSection = new VBox();
+        
+        if (sidebarType == SidebarType.AUTH_VIEW) {
+            // Features preview for auth view
+            featuresPreview = createFeaturesPreview();
+            featuresPreview.setPadding(new Insets(0, 0, 0, 0));
+            featuresPreview.setVisible(sidebarExpanded && !themePickerVisible);
+            featuresPreview.setManaged(sidebarExpanded && !themePickerVisible);
+            contentSection = featuresPreview;
+        } else if (sidebarType == SidebarType.DASHBOARD_VIEW) {
+            // Additional dashboard content could go here if needed
+            // For now, just return empty content section
+            contentSection.setVisible(sidebarExpanded && !themePickerVisible);
+            contentSection.setManaged(sidebarExpanded && !themePickerVisible);
+        }
+        
+        currentFeaturesPreview = contentSection;
+        return contentSection;
     }
     
     private static HBox createSidebarHeader() {
@@ -124,50 +163,119 @@ public class SidebarUtil {
         return header;
     }
     
-    private static VBox createSidebarNavigation() {
+    private static VBox createSidebarNavigation(SidebarType sidebarType) {
         VBox navigation = new VBox(8);
         navigation.getStyleClass().add("sidebar-navigation");
         navigation.setPadding(new Insets(5, 5, 5, 5));
         navigation.setMinHeight(64);
         navigation.setAlignment(Pos.CENTER);
         
-        themePickerBtn = new Button();
-        themePickerBtn.setFocusTraversable(false);
-        themePickerBtn.getStyleClass().add("sidebar-nav-button");
-        
-        updateNavigationButton(themePickerBtn);
-        
-        themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                toggleThemePicker();
-            }
-        });
+        if (sidebarType == SidebarType.AUTH_VIEW) {
+            // Only theme picker for auth view
+            themePickerBtn = createNavigationButton("🎨", "Customize Theme");
+            themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    toggleThemePicker();
+                }
+            });
+            navigation.getChildren().add(themePickerBtn);
+            
+        } else if (sidebarType == SidebarType.DASHBOARD_VIEW) {
+            // Full navigation for dashboard view
+            dashboardBtn = createNavigationButton("📊", "Dashboard");
+            dashboardBtn.getStyleClass().add("sidebar-nav-button-active"); // Default active
+            dashboardBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(dashboardBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("dashboard");
+            });
+            
+            reportsBtn = createNavigationButton("📈", "Reports");
+            reportsBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(reportsBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("reports");
+            });
+            
+            themePickerBtn = createNavigationButton("🎨", "Customize Theme");
+            themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    toggleThemePicker();
+                }
+            });
+            
+            goalsBtn = createNavigationButton("🏆", "Goals");
+            goalsBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(goalsBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("goals");
+            });
+            
+            logoutBtn = createNavigationButton("🚪", "Logout");
+            logoutBtn.setOnMouseClicked(e -> {
+                if (navigationCallback != null) navigationCallback.onNavigate("logout");
+            });
+            
+            navigation.getChildren().addAll(dashboardBtn, reportsBtn, themePickerBtn, goalsBtn, logoutBtn);
+        }
 
-        navigation.getChildren().add(themePickerBtn);
         return navigation;
     }
+
+    private static Button createNavigationButton(String icon, String text) {
+        Button button = new Button();
+        button.setFocusTraversable(false);
+        button.getStyleClass().add("sidebar-nav-button");
+        
+        updateNavigationButton(button, icon, text);
+        return button;
+    }
     
-    private static void updateNavigationButton(Button themePickerBtn) {
+    private static void updateNavigationButton(Button button, String icon, String text) {
         if (sidebarExpanded) {
             HBox btnContent = new HBox(8);
             btnContent.setAlignment(Pos.CENTER_LEFT);
             btnContent.setPadding(new Insets(4, 4, 4, 4));
 
-            Label icon = new Label("🎨");
-            icon.getStyleClass().add("sidebar-nav-button-text");
-            icon.setPadding(new Insets(0, 0, 0, 4));
+            Label iconLabel = new Label(icon);
+            iconLabel.getStyleClass().add("sidebar-nav-button-text");
+            iconLabel.setPadding(new Insets(0, 0, 0, 4));
 
-            Label text = new Label("Customize Theme");
-            text.getStyleClass().add("sidebar-nav-button-text");
+            Label textLabel = new Label(text);
+            textLabel.getStyleClass().add("sidebar-nav-button-text");
 
-            btnContent.getChildren().addAll(icon, text);
-            themePickerBtn.setGraphic(btnContent);
-            themePickerBtn.setMaxWidth(Double.MAX_VALUE);
+            btnContent.getChildren().addAll(iconLabel, textLabel);
+            button.setGraphic(btnContent);
+            button.setMaxWidth(Double.MAX_VALUE);
         } else {
-            Label icon = new Label("🎨");
-            themePickerBtn.setGraphic(icon);
-            themePickerBtn.setVisible(true);
+            Label iconLabel = new Label(icon);
+            button.setGraphic(iconLabel);
+            button.setVisible(true);
+        }
+    }
+
+    private static void setActiveNavButton(Button activeButton) {
+        // Remove active class from all navigation buttons
+        if (dashboardBtn != null) dashboardBtn.getStyleClass().remove("sidebar-nav-button-active");
+        if (reportsBtn != null) reportsBtn.getStyleClass().remove("sidebar-nav-button-active");
+        if (goalsBtn != null) goalsBtn.getStyleClass().remove("sidebar-nav-button-active");
+        
+        // Add active class to the clicked button (exclude theme picker and logout)
+        if (activeButton != null && activeButton != themePickerBtn && activeButton != logoutBtn) {
+            activeButton.getStyleClass().add("sidebar-nav-button-active");
+        }
+    }
+
+    private static void updateAllNavigationButtons() {
+        if (currentSidebarType == SidebarType.AUTH_VIEW) {
+            if (themePickerBtn != null) {
+                updateNavigationButton(themePickerBtn, "🎨", "Customize Theme");
+            }
+        } else if (currentSidebarType == SidebarType.DASHBOARD_VIEW) {
+            if (dashboardBtn != null) updateNavigationButton(dashboardBtn, "📊", "Dashboard");
+            if (reportsBtn != null) updateNavigationButton(reportsBtn, "📈", "Reports");
+            if (themePickerBtn != null) updateNavigationButton(themePickerBtn, "🎨", "Customize Theme");
+            if (goalsBtn != null) updateNavigationButton(goalsBtn, "🏆", "Goals");
+            if (logoutBtn != null) updateNavigationButton(logoutBtn, "🚪", "Logout");
         }
     }
     
@@ -211,7 +319,7 @@ public class SidebarUtil {
         footer.setPadding(new Insets(0));
         footer.getStyleClass().add("theme-picker-active-badge");
 
-        Label activeBadge = new Label("Cozy Café Active");
+        Label activeBadge = new Label("Soft Amethyst Active");
         activeBadge.getStyleClass().add("theme-picker-text");
         footer.getChildren().add(activeBadge);
 
@@ -239,6 +347,10 @@ public class SidebarUtil {
 
         changeTheme(themeName);
         System.out.println("Theme switched to: " + themeName);
+
+        if (themePickerVisible) {
+            toggleThemePicker(); // This will collapse the theme picker and show features preview
+        }
     }
     
     private static String getThemeNameByIndex(int index) {
@@ -298,10 +410,12 @@ public class SidebarUtil {
         VBox preview = new VBox(12);
         preview.setAlignment(Pos.CENTER);
         
-        VBox previewCard = AuthPanelUtil.createCozyFeaturePreview();
-        preview.getChildren().add(previewCard);
+        // Only show features preview for auth view
+        if (currentSidebarType == SidebarType.AUTH_VIEW) {
+            VBox previewCard = AuthPanelUtil.createCozyFeaturePreview();
+            preview.getChildren().add(previewCard);
+        }
         
-        currentFeaturesPreview = preview; 
         return preview;
     }
     
@@ -339,11 +453,14 @@ public class SidebarUtil {
             toggleIcon.setText(sidebarExpanded ? "<" : ">");
             logoSection.setVisible(sidebarExpanded);
             logoSection.setManaged(sidebarExpanded);
-            updateNavigationButton(themePickerBtn);
 
-            if (currentFeaturesPreview != null) {
-                currentFeaturesPreview.setVisible(sidebarExpanded);
-                currentFeaturesPreview.setManaged(sidebarExpanded);
+            // Update all navigation buttons for current sidebar type
+            updateAllNavigationButtons();
+
+            // Properly update features preview visibility for AUTH_VIEW
+            if (currentFeaturesPreview != null && currentSidebarType == SidebarType.AUTH_VIEW) {
+                currentFeaturesPreview.setVisible(sidebarExpanded && !themePickerVisible);
+                currentFeaturesPreview.setManaged(sidebarExpanded && !themePickerVisible);
             }
 
             VBox footer = (VBox) currentSidebar.lookup(".sidebar-footer");
@@ -361,11 +478,6 @@ public class SidebarUtil {
         fade.setAutoReverse(true);
         fade.play();
 
-        updateSidebarVisibility(currentThemeContent, currentFeaturesPreview);
-
-        featuresPreview.setVisible(sidebarExpanded);
-        featuresPreview.setManaged(sidebarExpanded);
-
         if (!sidebarExpanded) {
             themePickerVisible = false;
             themePickerScrollPane.setVisible(false);
@@ -373,7 +485,9 @@ public class SidebarUtil {
             themePickerScrollPane.setMaxHeight(0);
             themePickerScrollPane.setMinHeight(0);
             themePickerScrollPane.setPrefHeight(0);
-            themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
+            if (themePickerBtn != null) {
+                themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
+            }
         }
 
         System.out.println("themePickerVisible: " + themePickerVisible + " after toggleSidebar");
@@ -396,6 +510,7 @@ public class SidebarUtil {
     public static void toggleThemePicker() {
         if (!sidebarExpanded) {
             toggleSidebar();
+            return; // Return early to avoid double execution
         }
 
         System.out.println("Theme Picker Visible: " + themePickerVisible + " at toggleThemePicker");
@@ -407,7 +522,9 @@ public class SidebarUtil {
         double collapsedHeight = 0;
 
         if (themePickerVisible) {
-            themePickerBtn.getStyleClass().add("sidebar-nav-button-active");
+            if (themePickerBtn != null) {
+                themePickerBtn.getStyleClass().add("sidebar-nav-button-active");
+            }
             themePickerScrollPane.setVisible(true);
             themePickerScrollPane.setManaged(true);
 
@@ -425,9 +542,17 @@ public class SidebarUtil {
             );
             expand.play();
 
+            // Hide features preview when theme picker is visible (only for AUTH_VIEW)
+            if (currentFeaturesPreview != null && currentSidebarType == SidebarType.AUTH_VIEW) {
+                currentFeaturesPreview.setVisible(false);
+                currentFeaturesPreview.setManaged(false);
+            }
+
             System.out.println("Theme Picker Expanded: " + themePickerVisible);
         } else {
-            themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
+            if (themePickerBtn != null) {
+                themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
+            }
             Timeline collapse = new Timeline(
                 new KeyFrame(Duration.ZERO,
                     new KeyValue(themePickerScrollPane.maxHeightProperty(), themePickerScrollPane.getHeight()),
@@ -442,15 +567,19 @@ public class SidebarUtil {
             );
             collapse.setOnFinished(e -> {
                 themePickerScrollPane.setVisible(false);
-                themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
                 themePickerScrollPane.setManaged(false);
+
+                // Show features preview when theme picker is hidden (only for AUTH_VIEW)
+                if (currentFeaturesPreview != null && sidebarExpanded && currentSidebarType == SidebarType.AUTH_VIEW) {
+                    currentFeaturesPreview.setVisible(true);
+                    currentFeaturesPreview.setManaged(true);
+                }
             });
             collapse.play();
             System.out.println("Theme Picker Collapsed: " + themePickerVisible + " after collapse");
         }
-        //themePickerVisible = !themePickerVisible;
-        System.out.println("Theme Picker Visible: " + themePickerVisible + " after toggleThemePicker");
 
+        System.out.println("Theme Picker Visible: " + themePickerVisible + " after toggleThemePicker");
     }
 
     private static void updateSidebarVisibility(ScrollPane themeContent, VBox featuresPreview) {
@@ -468,5 +597,49 @@ public class SidebarUtil {
         box.setPadding(new Insets(10));
         box.getChildren().add(createThemePicker());
         return box;
+    }
+
+    public static void resetThemePickerState() {
+        themePickerVisible = false;
+        if (themePickerScrollPane != null) {
+            themePickerScrollPane.setVisible(false);
+            themePickerScrollPane.setManaged(false);
+            themePickerScrollPane.setMaxHeight(0);
+            themePickerScrollPane.setMinHeight(0);
+            themePickerScrollPane.setPrefHeight(0);
+        }
+        if (themePickerBtn != null) {
+            themePickerBtn.getStyleClass().remove("sidebar-nav-button-active");
+        }
+
+        // Show features preview if sidebar is expanded and we're in AUTH_VIEW
+        if (currentFeaturesPreview != null && sidebarExpanded && currentSidebarType == SidebarType.AUTH_VIEW) {
+            currentFeaturesPreview.setVisible(true);
+            currentFeaturesPreview.setManaged(true);
+        }
+    }
+
+    // Getters for dashboard navigation buttons (for external access if needed)
+    public static Button getDashboardButton() { return dashboardBtn; }
+    public static Button getReportsButton() { return reportsBtn; }
+    public static Button getGoalsButton() { return goalsBtn; }
+    public static Button getLogoutButton() { return logoutBtn; }
+    public static Button getThemePickerButton() { return themePickerBtn; }
+
+    // Method to set active navigation button externally
+    public static void setActiveNavigation(String navigationName) {
+        switch (navigationName.toLowerCase()) {
+            case "dashboard":
+                if (dashboardBtn != null) setActiveNavButton(dashboardBtn);
+                break;
+            case "reports":
+                if (reportsBtn != null) setActiveNavButton(reportsBtn);
+                break;
+            case "goals":
+                if (goalsBtn != null) setActiveNavButton(goalsBtn);
+                break;
+            default:
+                System.out.println("Unknown navigation: " + navigationName);
+        }
     }
 }

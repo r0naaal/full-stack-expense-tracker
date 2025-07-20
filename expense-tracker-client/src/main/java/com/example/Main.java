@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.utils.ThemeManager;
 import com.example.utils.ViewNavigator;
 import com.example.views.AuthView;
 import com.example.views.DashboardView;
@@ -16,7 +17,12 @@ public class Main extends Application {
         stage.setTitle("Expense Tracker");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         ViewNavigator.setMainStage(stage);
-        new DashboardView().show("Cafe");
+
+        // create view instances
+        DashboardView dashboardView = new DashboardView();
+        AuthView authView = new AuthView();
+
+        authView.show(ThemeManager.getInstance().getCurrentTheme());
     }
 
     public static void main(String[] args){

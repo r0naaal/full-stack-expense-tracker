@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.utils.SidebarUtil;
 import com.example.views.AuthView;
 import com.example.views.DashboardView;
 
@@ -15,9 +16,9 @@ public class DashboardController {
 
     private void initialize() {
         
-        dashboardView.getReportsButton().setOnMouseClicked(e -> showReports());
+        //dashboardView.getReportsButton().setOnMouseClicked(e -> showReports());
         //dashboardView.getGoalsButton().setOnMouseClicked(e -> showGoals());
-        dashboardView.getLoginViewButton().setOnMouseClicked(e -> showLoginView());
+        //SidebarUtil.getLogoutButton().setOnMouseClicked(e -> showLoginView());
         
     }
     

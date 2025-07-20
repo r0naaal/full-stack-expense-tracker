@@ -1,7 +1,9 @@
 package com.example.views;
 
 import com.example.controllers.AuthController;
+import com.example.controllers.DashboardController;
 import com.example.utils.SidebarUtil;
+import com.example.utils.ThemeManager;
 import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
 
@@ -13,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
-public class AuthView {
+public class AuthView implements ThemeManager.ThemeChangeListener {
 
     private Scene currentScene;
 
@@ -48,23 +50,38 @@ public class AuthView {
     private HBox sidebarHeader;
     private HBox topBar;
 
-    public void show(String theme){
-        currentScene = createScene(theme);
-
-        // load the css file from the themes directory
-        String cssPath = "/themes/" + theme + "Style.css";
-        System.out.println("Loading CSS from: " + cssPath);
-
-        currentScene.getStylesheets().clear();
-        currentScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+    public void show(String theme) {
+        // Register this view as the active listener
+        ThemeManager.getInstance().setActiveListener(this);
+    
+        // FIXED: Use current theme from ThemeManager if no specific theme provided
+        String currentTheme = (theme != null) ? theme : ThemeManager.getInstance().getCurrentTheme();
         
+        currentScene = createScene(currentTheme);
+        
+        // Clear existing stylesheets and apply the new theme
+        currentScene.getStylesheets().clear();
+        currentScene.getStylesheets().add(getClass().getResource("/themes/" + currentTheme + "Style.css").toExternalForm());
+    
         new AuthController(this);
         ViewNavigator.switchViews(currentScene);
+        
+        // reset sidebar theme picker state when showing the view
+        SidebarUtil.resetThemePickerState();
     }
 
-    public void switchTheme(String theme) {
-        
-        show(theme);
+    // overloaded method to show with current theme:
+    public void show() {
+        show(null); // will use current theme from ThemeManager
+    }
+
+    @Override
+    public void onThemeChanged(String newTheme) {
+        // just refresh with the new theme, don't call show(newTheme) to avoid recursion issues
+        if (currentScene != null) {
+            currentScene.getStylesheets().clear();
+            currentScene.getStylesheets().add(getClass().getResource("/themes/" + newTheme + "Style.css").toExternalForm());
+        }
     }
 
     private Scene createScene(String theme){
@@ -73,7 +90,7 @@ public class AuthView {
         mainContainer.getStyleClass().add("main-container");
         
         // create sidebar (left side)
-        sidebar = SidebarUtil.createSidebar();
+        sidebar = SidebarUtil.createSidebar(SidebarUtil.SidebarType.AUTH_VIEW);
         mainContainer.setLeft(sidebar);
         
         // create main content area

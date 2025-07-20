@@ -35,8 +35,11 @@ public class AuthController {
             return;
         }
         
+        DashboardView dashboardView = new DashboardView();
+        dashboardView.show();
+
         // TODO: Implement actual authentication logic
-        new DashboardView().show("Cafe");
+        
     }
     
     private void handleSignup() {

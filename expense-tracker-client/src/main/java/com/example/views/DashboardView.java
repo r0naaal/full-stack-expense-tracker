@@ -2,8 +2,10 @@ package com.example.views;
 
 import com.example.controllers.DashboardController;
 import com.example.utils.SidebarUtil;
+import com.example.utils.ThemeManager;
 import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
+import com.example.utils.SidebarUtil.SidebarType;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -17,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
-public class DashboardView {
+public class DashboardView implements ThemeManager.ThemeChangeListener {
     
     private Scene currentScene; 
 
@@ -57,21 +59,55 @@ public class DashboardView {
 
     
     public void show(String theme) {
-        currentScene = createScene(theme);
-        
-        // clear existing stylesheets
-        currentScene.getStylesheets().clear();
-        currentScene.getStylesheets().add(getClass().getResource("/themes/" + theme + "Style.css").toExternalForm());
+        // register this view as the active listener
+        ThemeManager.getInstance().setActiveListener(this);
 
-        new DashboardController(this);
+        // use current theme from ThemeManager if no specific theme provided
+        String currentTheme = (theme != null) ? theme : ThemeManager.getInstance().getCurrentTheme();
+
+        currentScene = createScene(currentTheme);
+        
+        // clear existing stylesheets and apply the new theme
+        currentScene.getStylesheets().clear();
+        currentScene.getStylesheets().add(getClass().getResource("/themes/" + currentTheme + "Style.css").toExternalForm());
+
+        // set up navigation callback for sidebar
+        SidebarUtil.setNavigationCallback(new SidebarUtil.NavigationCallback() {
+            @Override
+            public void onNavigate(String destination) {
+                // handle navigation within dashboard
+                switch (destination) {
+                    case "dashboard":
+                        // Switch to dashboard content
+                        break;
+                    case "reports":
+                        // Switch to reports content
+                        break;
+                    case "goals":
+                        // Switch to goals content
+                        break;
+                    case "logout":
+                        // handle logout - switch back to AuthView
+                        AuthView authView = new AuthView();
+                        authView.show(); // this will use current theme
+                        break;
+                }
+            }
+        });
+
         ViewNavigator.switchViews(currentScene);
+        
+        // reset sidebar theme picker state when showing the view
+        SidebarUtil.resetThemePickerState();
     }
 
-    public void switchTheme(String themeName) {
-        currentScene.getStylesheets().clear();
-        currentScene.getStylesheets().add(
-            getClass().getResource("/styles/" + themeName + ".css").toExternalForm()
-        );
+    public void show(){
+        show(null);
+    }
+
+    @Override
+    public void onThemeChanged(String newTheme) {
+        show(newTheme); // refresh the view when the theme changes
     }
     
     /* ----------------------- MAIN SCENE CREATION ----------------------- */
@@ -81,7 +117,7 @@ public class DashboardView {
         mainContainer.getStyleClass().add("main-container");
         
         // create sidebar (left side)
-        sidebar = createDashboardSidebar();
+        sidebar = SidebarUtil.createSidebar(SidebarType.DASHBOARD_VIEW);
         sidebar.getStyleClass().add("default-sidebar");
 
         mainContainer.setLeft(sidebar);
@@ -146,189 +182,7 @@ public class DashboardView {
         return topBar;
     }
     
-    /* ----------------------- DASHBOARD SIDEBAR ----------------------- */
-    private VBox createDashboardSidebar() {
-        VBox sidebar = new VBox();
-        sidebar.setPrefWidth(sidebarExpanded ? 320 : 64);
-        sidebar.setMinWidth(64);
-        sidebar.setMaxWidth(320);
-        currentSidebar = sidebar;
-        
-        HBox header = createSidebarHeader();
-        VBox navigation = createSidebarNavigation();
-        
-        Region spacer = new Region();
-        VBox.setVgrow(spacer, Priority.ALWAYS);
-        
-        VBox footer = createSidebarFooter();
-
-        sidebar.getChildren().addAll(header, navigation, spacer, footer);
-        return sidebar;
-    }
-
-     /* ----------------------- CREATE SIDEBAR HEADER ----------------------- */
-    private HBox createSidebarHeader() {
-        HBox header = new HBox();
-        header.setPadding(new Insets(10));
-        header.setMinHeight(64);
-        header.setAlignment(Pos.CENTER_LEFT);
-        header.getStyleClass().add("debug-border");
-        
-        logoSection = new HBox(12);
-        logoSection.setAlignment(Pos.CENTER_LEFT);
-
-        Label logoText = new Label("📜");
-        logoText.getStyleClass().add("sidebar-logo-icon");
-
-        Label appTitle = new Label("CozyTracker");
-        appTitle.getStyleClass().add("sidebar-title");
-        
-        logoSection.getChildren().addAll(logoText, appTitle);
-        logoSection.setVisible(sidebarExpanded);
-        logoSection.setManaged(sidebarExpanded);
-        
-        Button toggleBtn = new Button();
-        toggleBtn.setFocusTraversable(false);
-        toggleBtn.getStyleClass().add("sidebar-toggle-button");
-
-        toggleIcon = new Label(sidebarExpanded ? "<" : ">");
-        toggleIcon.getStyleClass().add("sidebar-toggle-icon");
-        toggleBtn.setGraphic(toggleIcon);
-        
-        toggleBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                toggleSidebar();
-            }
-        });
-
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        header.getChildren().addAll(logoSection, spacer, toggleBtn);
-        
-        return header;
-    }
-    
-    private VBox createSidebarNavigation() {
-        VBox navigation = new VBox(8);
-        navigation.getStyleClass().add("sidebar-navigation");
-        navigation.setPadding(new Insets(10));
-        navigation.setMinHeight(64);
-        navigation.setAlignment(Pos.CENTER);
-
-        // hide while the sidebar is not toggled
-        navigation.setVisible(sidebarExpanded);
-        navigation.setManaged(sidebarExpanded);
-        currentSidebarNavigation = navigation;
-
-        // Create buttons and assign them to instance variables
-        dashboardBtn = createNavButtonWithSeparator("📊", "Dashboard");
-        reportsBtn = createNavButtonWithSeparator("📈", "Reports");
-        themePickerBtn = createNavButtonWithSeparator("🎨", "Theme Picker");
-        themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                toggleThemePicker();
-            }
-            
-        });
-
-        loginViewBtn = createNavButtonWithSeparator("@", "Login View");
-
-        // Add buttons to navigation
-        navigation.getChildren().addAll(
-            dashboardBtn,
-            reportsBtn,
-            themePickerBtn,
-            loginViewBtn
-        );
-        
-        return navigation;
-    }
-    
-    private void toggleThemePicker() {
-
-    }
-
-    private VBox createSidebarFooter() {
-        VBox footer = new VBox();
-        footer.getStyleClass().add("sidebar-footer");
-        footer.setPadding(new Insets(16));
-        footer.setAlignment(Pos.CENTER);
-        currentFooter = footer;
-
-        Label icon = new Label("⭐");
-        icon.getStyleClass().add("footer-icon");
-        footer.getChildren().add(icon);
-
-        return footer;
-    }
-    
-    private void toggleSidebar() {
-        sidebarExpanded = !sidebarExpanded;
-        double endWidth = sidebarExpanded ? 320 : 64;
-
-        // animate the width of the sidebar
-        Timeline timeline = new Timeline();
-        KeyValue keyValue = new KeyValue(currentSidebar.prefWidthProperty(), endWidth);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(130), keyValue);
-        timeline.getKeyFrames().add(keyFrame);
-        
-        timeline.setOnFinished(e -> {
-            toggleIcon.setText(sidebarExpanded ? "<" : ">");
-            logoSection.setVisible(sidebarExpanded);
-            logoSection.setManaged(sidebarExpanded);
-
-            currentSidebarNavigation.setVisible(sidebarExpanded);
-            currentSidebarNavigation.setManaged(sidebarExpanded);
-        });
-
-        // start animation
-        timeline.play();
-    }
-
-    /* ----------------------- NAVIGATION BUTTON CREATION ----------------------- */
-        private Button createNavButtonWithSeparator(String icon, String text) {
-        VBox buttonContainer = new VBox();
-        buttonContainer.getStyleClass().add("p-debug-border");
-        buttonContainer.setPadding(new Insets(4));
-        
-        // create the button
-        Button button = createNavButton(icon, text);
-        
-        // add button to the container
-        buttonContainer.getChildren().add(button);        
-        return button;
-    }
-
-
-    private Button createNavButton(String icon, String text) {
-        Button button = new Button();
-        button.setFocusTraversable(false);
-        
-        button.getStyleClass().add("sidebar-nav-button");
-        
-        HBox content = new HBox(8);
-        content.setAlignment(Pos.CENTER_LEFT);
-        content.setPadding(new Insets(4,4,4,4));
-        
-        Label iconLabel = new Label(icon);
-        iconLabel.getStyleClass().add("sidebar-nav-button-text");
-        
-        Label textLabel = new Label(text);
-        textLabel.getStyleClass().add("sidebar-nav-button-text");
-        
-        content.getChildren().addAll(iconLabel, textLabel);
-        button.setGraphic(content);
-        button.setMaxWidth(Double.MAX_VALUE);
-        
-        return button;
-    }
-    
-    /* ----------------------- MAIN DASHBOARD CONTENT ----------------------- */
+     /* ----------------------- MAIN DASHBOARD CONTENT ----------------------- */
     private ScrollPane createMainContent() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.getStyleClass().add("dashboard-content-scroll");
@@ -630,4 +484,5 @@ public class DashboardView {
     public Button getReportsButton() { return reportsBtn; }
     public Button getGoalsButton() { return goalsBtn; }
     public Button getLoginViewButton() { return loginViewBtn; }
+
 }
