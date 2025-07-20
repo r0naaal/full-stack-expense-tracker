@@ -1,6 +1,8 @@
 package com.example.controllers;
 
 import com.example.views.AuthView;
+import com.example.views.DashboardView;
+
 import javafx.scene.control.Alert;
 
 public class AuthController {
@@ -34,7 +36,7 @@ public class AuthController {
         }
         
         // TODO: Implement actual authentication logic
-        showAlert("Login successful! (Demo)");
+        new DashboardView().show("Cafe");
     }
     
     private void handleSignup() {

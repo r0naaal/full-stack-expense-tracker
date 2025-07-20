@@ -5,10 +5,17 @@ import com.example.utils.SidebarUtil;
 import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
+import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 public class DashboardView {
     
@@ -29,6 +36,26 @@ public class DashboardView {
     private VBox quickActionsWidget;
     private VBox goalsWidget;
     
+    private boolean sidebarExpanded = false;
+    private VBox currentSidebar;
+    private HBox logoSection;
+    private Label toggleIcon;
+    private VBox currentSidebarNavigation;
+    private VBox currentFooter;
+    
+    private Button themePickerBtn;
+
+    private Button dashboardBtn;
+
+    private Button categoriesBtn;
+
+    private Button reportsBtn;
+
+    private Button goalsBtn;
+
+    private Button loginViewBtn;
+
+    
     public void show(String theme) {
         currentScene = createScene(theme);
         
@@ -39,6 +66,13 @@ public class DashboardView {
         new DashboardController(this);
         ViewNavigator.switchViews(currentScene);
     }
+
+    public void switchTheme(String themeName) {
+        currentScene.getStylesheets().clear();
+        currentScene.getStylesheets().add(
+            getClass().getResource("/styles/" + themeName + ".css").toExternalForm()
+        );
+    }
     
     /* ----------------------- MAIN SCENE CREATION ----------------------- */
     private Scene createScene(String theme) {
@@ -47,7 +81,9 @@ public class DashboardView {
         mainContainer.getStyleClass().add("main-container");
         
         // create sidebar (left side)
-        sidebar = SidebarUtil.createSidebar();
+        sidebar = createDashboardSidebar();
+        sidebar.getStyleClass().add("default-sidebar");
+
         mainContainer.setLeft(sidebar);
         
         // Create main content area
@@ -60,13 +96,13 @@ public class DashboardView {
     /* ----------------------- DASHBOARD CONTENT AREA ----------------------- */
     private VBox createContentArea() {
         VBox contentArea = new VBox();
-        contentArea.getStyleClass().add("debug-border");
+        contentArea.getStyleClass().add("content-area");
                 
         // Top bar
         HBox topBar = createDashboardTopBar();
         
         // Main dashboard content
-        ScrollPane mainContent = createMainDashboardContent();
+        ScrollPane mainContent = createMainContent();
         
         contentArea.getChildren().addAll(topBar, mainContent);
         HBox.setHgrow(mainContent, Priority.ALWAYS);
@@ -77,7 +113,7 @@ public class DashboardView {
     /* ----------------------- DASHBOARD TOP BAR ----------------------- */
     private HBox createDashboardTopBar() {
         HBox topBar = new HBox();
-        topBar.getStyleClass().add("dashboard-top-bar");
+        topBar.getStyleClass().add("default-top-bar");
         topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.setPadding(new Insets(16, 24, 16, 24));
         topBar.setPrefHeight(64);
@@ -89,14 +125,10 @@ public class DashboardView {
         titleSection.setAlignment(Pos.CENTER_LEFT);
         
         Label titleLabel = new Label("Dashboard");
-        titleLabel.getStyleClass().add("dashboard-page-title");
+        titleLabel.getStyleClass().add("form-title");
         
         Label cozyBadge = new Label("Cozy Mode");
-        cozyBadge.getStyleClass().add("cozy-badge-enhanced");
-        
-        // Enhanced hover effect for badge
-        cozyBadge.setOnMouseEntered(e -> cozyBadge.getStyleClass().add("cozy-badge-hover"));
-        cozyBadge.setOnMouseExited(e -> cozyBadge.getStyleClass().remove("cozy-badge-hover"));
+        cozyBadge.getStyleClass().add("cozy-mode-badge");
         
         titleSection.getChildren().addAll(titleLabel, cozyBadge);
         
@@ -105,7 +137,6 @@ public class DashboardView {
         controls.setAlignment(Pos.CENTER_RIGHT);
         
         Label hintLabel = new Label("Use the sidebar to customize themes");
-        // Removed customize button and related code for a cleaner, cozier dashboard top bar
         controls.getChildren().add(hintLabel);
         
         Region spacer = new Region();
@@ -115,81 +146,199 @@ public class DashboardView {
         return topBar;
     }
     
-    /* ----------------------- DASHBOARD SIDEBAR NAVIGATION ----------------------- */
+    /* ----------------------- DASHBOARD SIDEBAR ----------------------- */
     private VBox createDashboardSidebar() {
         VBox sidebar = new VBox();
-        sidebar.getStyleClass().add("dashboard-sidebar");
-        sidebar.setPrefWidth(192);
-        sidebar.setMinWidth(192);
-        sidebar.setPadding(new Insets(16));
+        sidebar.setPrefWidth(sidebarExpanded ? 320 : 64);
+        sidebar.setMinWidth(64);
+        sidebar.setMaxWidth(320);
+        currentSidebar = sidebar;
         
-        // Navigation buttons
-        VBox navigation = new VBox(8);
+        HBox header = createSidebarHeader();
+        VBox navigation = createSidebarNavigation();
         
-        Button dashboardBtn = createNavButton("📊", "Dashboard", true);
-        Button categoriesBtn = createNavButton("👛", "Categories", false);
-        Button settingsBtn = createNavButton("⚙", "Settings", false);
-        Button reportsBtn = createNavButton("📈", "Reports", false);
-        Button goalsBtn = createNavButton("🎯", "Goals", false);
-        
-        navigation.getChildren().addAll(dashboardBtn, categoriesBtn, reportsBtn, goalsBtn, settingsBtn);
-        
-        // Footer
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
         
-        VBox footer = new VBox();
-        footer.setAlignment(Pos.CENTER);
-        footer.setPadding(new Insets(16, 0, 0, 0));
-        
-        Label footerText = new Label("Made with care");
-        footerText.getStyleClass().add("dashboard-footer-text");
-        footer.getChildren().add(footerText);
-        
-        sidebar.getChildren().addAll(navigation, spacer, footer);
+        VBox footer = createSidebarFooter();
+
+        sidebar.getChildren().addAll(header, navigation, spacer, footer);
         return sidebar;
     }
-    
-    /* ----------------------- NAVIGATION BUTTON CREATION ----------------------- */
-    private Button createNavButton(String icon, String text, boolean active) {
-        Button button = new Button();
-        button.getStyleClass().add("dashboard-nav-button");
-        if (active) button.getStyleClass().add("dashboard-nav-active");
-        button.setMaxWidth(Double.MAX_VALUE);
+
+     /* ----------------------- CREATE SIDEBAR HEADER ----------------------- */
+    private HBox createSidebarHeader() {
+        HBox header = new HBox();
+        header.setPadding(new Insets(10));
+        header.setMinHeight(64);
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.getStyleClass().add("debug-border");
         
-        HBox content = new HBox(12);
+        logoSection = new HBox(12);
+        logoSection.setAlignment(Pos.CENTER_LEFT);
+
+        Label logoText = new Label("📜");
+        logoText.getStyleClass().add("sidebar-logo-icon");
+
+        Label appTitle = new Label("CozyTracker");
+        appTitle.getStyleClass().add("sidebar-title");
+        
+        logoSection.getChildren().addAll(logoText, appTitle);
+        logoSection.setVisible(sidebarExpanded);
+        logoSection.setManaged(sidebarExpanded);
+        
+        Button toggleBtn = new Button();
+        toggleBtn.setFocusTraversable(false);
+        toggleBtn.getStyleClass().add("sidebar-toggle-button");
+
+        toggleIcon = new Label(sidebarExpanded ? "<" : ">");
+        toggleIcon.getStyleClass().add("sidebar-toggle-icon");
+        toggleBtn.setGraphic(toggleIcon);
+        
+        toggleBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                toggleSidebar();
+            }
+        });
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        header.getChildren().addAll(logoSection, spacer, toggleBtn);
+        
+        return header;
+    }
+    
+    private VBox createSidebarNavigation() {
+        VBox navigation = new VBox(8);
+        navigation.getStyleClass().add("sidebar-navigation");
+        navigation.setPadding(new Insets(10));
+        navigation.setMinHeight(64);
+        navigation.setAlignment(Pos.CENTER);
+
+        // hide while the sidebar is not toggled
+        navigation.setVisible(sidebarExpanded);
+        navigation.setManaged(sidebarExpanded);
+        currentSidebarNavigation = navigation;
+
+        // Create buttons and assign them to instance variables
+        dashboardBtn = createNavButtonWithSeparator("📊", "Dashboard");
+        reportsBtn = createNavButtonWithSeparator("📈", "Reports");
+        themePickerBtn = createNavButtonWithSeparator("🎨", "Theme Picker");
+        themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                toggleThemePicker();
+            }
+            
+        });
+
+        loginViewBtn = createNavButtonWithSeparator("@", "Login View");
+
+        // Add buttons to navigation
+        navigation.getChildren().addAll(
+            dashboardBtn,
+            reportsBtn,
+            themePickerBtn,
+            loginViewBtn
+        );
+        
+        return navigation;
+    }
+    
+    private void toggleThemePicker() {
+
+    }
+
+    private VBox createSidebarFooter() {
+        VBox footer = new VBox();
+        footer.getStyleClass().add("sidebar-footer");
+        footer.setPadding(new Insets(16));
+        footer.setAlignment(Pos.CENTER);
+        currentFooter = footer;
+
+        Label icon = new Label("⭐");
+        icon.getStyleClass().add("footer-icon");
+        footer.getChildren().add(icon);
+
+        return footer;
+    }
+    
+    private void toggleSidebar() {
+        sidebarExpanded = !sidebarExpanded;
+        double endWidth = sidebarExpanded ? 320 : 64;
+
+        // animate the width of the sidebar
+        Timeline timeline = new Timeline();
+        KeyValue keyValue = new KeyValue(currentSidebar.prefWidthProperty(), endWidth);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(130), keyValue);
+        timeline.getKeyFrames().add(keyFrame);
+        
+        timeline.setOnFinished(e -> {
+            toggleIcon.setText(sidebarExpanded ? "<" : ">");
+            logoSection.setVisible(sidebarExpanded);
+            logoSection.setManaged(sidebarExpanded);
+
+            currentSidebarNavigation.setVisible(sidebarExpanded);
+            currentSidebarNavigation.setManaged(sidebarExpanded);
+        });
+
+        // start animation
+        timeline.play();
+    }
+
+    /* ----------------------- NAVIGATION BUTTON CREATION ----------------------- */
+        private Button createNavButtonWithSeparator(String icon, String text) {
+        VBox buttonContainer = new VBox();
+        buttonContainer.getStyleClass().add("p-debug-border");
+        buttonContainer.setPadding(new Insets(4));
+        
+        // create the button
+        Button button = createNavButton(icon, text);
+        
+        // add button to the container
+        buttonContainer.getChildren().add(button);        
+        return button;
+    }
+
+
+    private Button createNavButton(String icon, String text) {
+        Button button = new Button();
+        button.setFocusTraversable(false);
+        
+        button.getStyleClass().add("sidebar-nav-button");
+        
+        HBox content = new HBox(8);
         content.setAlignment(Pos.CENTER_LEFT);
+        content.setPadding(new Insets(4,4,4,4));
         
         Label iconLabel = new Label(icon);
-        iconLabel.getStyleClass().add("dashboard-nav-icon");
+        iconLabel.getStyleClass().add("sidebar-nav-button-text");
         
         Label textLabel = new Label(text);
-        textLabel.getStyleClass().add("dashboard-nav-text");
+        textLabel.getStyleClass().add("sidebar-nav-button-text");
         
         content.getChildren().addAll(iconLabel, textLabel);
         button.setGraphic(content);
-        
-        // Enhanced hover effects
-        // button.setOnMouseEntered(e -> {
-        //     if (!active) button.getStyleClass().add("dashboard-nav-hover");
-        // });
-        // button.setOnMouseExited(e -> button.getStyleClass().remove("dashboard-nav-hover"));
-        // 
-        // button.setOnAction(e -> switchDashboardTab(text));
+        button.setMaxWidth(Double.MAX_VALUE);
         
         return button;
     }
     
     /* ----------------------- MAIN DASHBOARD CONTENT ----------------------- */
-    private ScrollPane createMainDashboardContent() {
+    private ScrollPane createMainContent() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.getStyleClass().add("dashboard-content-scroll");
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
         VBox content = new VBox(24);
+        content.getStyleClass().add("b-debug-border");
         content.setPadding(new Insets(24));
-        content.setMaxWidth(1200);
+        content.setMaxWidth(Double.MAX_VALUE);
         
         // Welcome section
         VBox welcomeSection = createWelcomeSection();
@@ -206,13 +355,15 @@ public class DashboardView {
     /* ----------------------- WELCOME SECTION ----------------------- */
     private VBox createWelcomeSection() {
         VBox welcomeSection = new VBox(20);
-        welcomeSection.getStyleClass().add("dashboard-welcome-section");
+        welcomeSection.getStyleClass().add("p-debug-border");
+        // TODO: add cozy welcome section style
         welcomeSection.setPadding(new Insets(24));
         
         // Header
         HBox header = new HBox(12);
         header.setAlignment(Pos.CENTER_LEFT);
-        
+        // TODO: add styling for header
+
         Label sparkle = new Label("✨");
         sparkle.getStyleClass().add("welcome-icon");
         
@@ -230,7 +381,9 @@ public class DashboardView {
         
         // Quick actions grid
         GridPane quickActions = createQuickActionsGrid();
-        
+
+        // TODO: create tracking labels
+
         welcomeSection.getChildren().addAll(header, description, quickActions);
         return welcomeSection;
     }
@@ -238,7 +391,8 @@ public class DashboardView {
     /* ----------------------- QUICK ACTIONS GRID ----------------------- */
     private GridPane createQuickActionsGrid() {
         GridPane grid = new GridPane();
-        grid.getStyleClass().add("quick-actions-grid");
+        grid.getStyleClass().add("b-debug-border");
+        // TODO: add cozy quick actions style
         grid.setHgap(16);
         grid.setVgap(16);
         
@@ -270,7 +424,8 @@ public class DashboardView {
     /* ----------------------- QUICK ACTION BUTTON ----------------------- */
     private Button createQuickActionButton(String icon, String text) {
         Button button = new Button();
-        button.getStyleClass().add("quick-action-button");
+        button.getStyleClass().add("g-debug-border");
+        // TODO: add cozy quick action button style
         button.setPrefHeight(80);
         button.setMaxWidth(Double.MAX_VALUE);
 
@@ -286,17 +441,14 @@ public class DashboardView {
         content.getChildren().addAll(iconLabel, textLabel);
         button.setGraphic(content);
 
-        // Enhanced hover effects
-        button.setOnMouseEntered(e -> button.getStyleClass().add("quick-action-hover"));
-        button.setOnMouseExited(e -> button.getStyleClass().remove("quick-action-hover"));
-
         return button;
     }
     
     /* ----------------------- DASHBOARD GRID ----------------------- */
     private GridPane createDashboardGrid() {
         GridPane grid = new GridPane();
-        grid.getStyleClass().add("dashboard-main-grid");
+        grid.getStyleClass().add("o-debug-border");
+        // TODO: add cozy dashboard grid style
         grid.setHgap(24);
         grid.setVgap(24);
         
@@ -320,7 +472,7 @@ public class DashboardView {
     /* ----------------------- RECENT ACTIVITY WIDGET ----------------------- */
     private VBox createRecentActivityWidget() {
         VBox widget = new VBox(16);
-        widget.getStyleClass().add("dashboard-widget");
+        widget.getStyleClass().add("debug-border");
         widget.setPadding(new Insets(24));
         
         // Widget header
@@ -391,7 +543,7 @@ public class DashboardView {
     /* ----------------------- MONTHLY OVERVIEW WIDGET ----------------------- */
     private VBox createMonthlyOverviewWidget() {
         VBox widget = new VBox(16);
-        widget.getStyleClass().add("dashboard-widget");
+        widget.getStyleClass().add("debug-border");
         widget.setPadding(new Insets(24));
         
         // Widget header
@@ -473,4 +625,9 @@ public class DashboardView {
     public String getActiveTab() { return activeTab; }
     public VBox getRecentActivityWidget() { return recentActivityWidget; }
     public VBox getMonthlyOverviewWidget() { return monthlyOverviewWidget; }
+
+    public Button getDashboardButton() { return dashboardBtn; }
+    public Button getReportsButton() { return reportsBtn; }
+    public Button getGoalsButton() { return goalsBtn; }
+    public Button getLoginViewButton() { return loginViewBtn; }
 }

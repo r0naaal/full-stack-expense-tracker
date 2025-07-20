@@ -16,7 +16,7 @@ public class Main extends Application {
         stage.setTitle("Expense Tracker");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         ViewNavigator.setMainStage(stage);
-        new DashboardView().show("PixelGarden");
+        new DashboardView().show("Cafe");
     }
 
     public static void main(String[] args){
