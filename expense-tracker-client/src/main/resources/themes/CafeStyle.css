@@ -141,7 +141,7 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-font-size: 16px;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
     -fx-effect: null;
     -fx-cursor: hand;
 }
@@ -157,7 +157,7 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-font-size: 16px;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
     -fx-effect: null;
 }
 
@@ -191,13 +191,15 @@
 
 .mode-toggle-button:hover {
     -fx-background-color: #e0d7c7;
-    -fx-border-color: #d1c3b2;
+    -fx-border-color: transparent;
+    -fx-font-weight: 700;
 }
 
 .mode-toggle-button.selected {
     -fx-background-color: #9c6c4b;
     -fx-text-fill: #f5f4f0;
-    -fx-border-color: #9c6c4b;
+    -fx-font-weight: 700;
+    -fx-border-color: transparent;
 }
 
 /* ==================== INPUT FIELDS ==================== */
@@ -216,10 +218,10 @@
 }
 
 .default-text-field:focused, .default-password-field:focused {
-    -fx-border-color: #ac9d8e, #9b6c4b; /* inner, outer */
-    -fx-border-width: 1, 2;             /* inner, outer */
-    -fx-border-insets: 0, -4;           /* inner, outer (outer is 2px away from inner) */
-    -fx-border-radius: 12, 16;          /* match background radius, outer slightly larger */
+    -fx-border-color: #ac9d8e, #9b6c4b; 
+    -fx-border-width: 1, 2;             
+    -fx-border-insets: 0, -4;           
+    -fx-border-radius: 12, 16;          
     -fx-background-color: #f5f4f0;
     -fx-font-size: 16px;
     -fx-text-fill: #4e342e;
@@ -503,7 +505,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
-    -fx-max-width: 300; /* Set a maximum width */
+    -fx-max-width: 300;
 }
 
 .preview-card-header {
@@ -518,8 +520,8 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-padding: 8;
-    -fx-max-width: 280; /* Set a maximum width */
-    -fx-max-height: 60; /* Set a maximum height */
+    -fx-max-width: 280;
+    -fx-max-height: 60; 
 
 }
 .preview-card-item:hover {
@@ -724,13 +726,13 @@
     -fx-spacing: 8px;
 }
 
-/* Emoji styling */
+
 .tracking-emoji {
     -fx-font-size: 20px;
     -fx-font-weight: normal;
 }
 
-/* Percentage styling */
+
 .tracking-percentage {
     -fx-font-size: 12px;
     -fx-font-weight: 600;
@@ -754,14 +756,13 @@
     -fx-background-color: rgba(107, 114, 128, 0.1);
 }
 
-/* Main value styling */
+
 .tracking-value {
     -fx-font-size: 24px;
     -fx-font-weight: 700;
     -fx-text-fill: #9c6c4b;
 }
 
-/* Label styling */
 .tracking-label {
     -fx-font-size: 13px;
     -fx-font-weight: 500;

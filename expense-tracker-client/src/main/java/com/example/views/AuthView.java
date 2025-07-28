@@ -268,7 +268,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         
         SVGPath clonIcon = new SVGPath();
         clonIcon.setContent(icon.getContent());
-        clonIcon.setFill(Color.valueOf("#000000"));
+        clonIcon.setFill(Color.valueOf("#0000009f"));
         clonIcon.setScaleX(1.1);
         clonIcon.setScaleY(1.1);
         

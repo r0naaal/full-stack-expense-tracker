@@ -2,25 +2,25 @@
 
 /* ==================== MAIN BACKGROUNDS ==================== */
 .root, .main-container, .content-area, .default-branding-column {
-    -fx-background-color: #fcebff; 
+    -fx-background-color: #fef8ff; 
 }
 
 .default-top-bar {
-    -fx-background-color: #fae0ff; 
-    -fx-border-color: #f7c6fd; 
+    -fx-background-color: #fbeefd; 
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 1;
 }
 
 /* ==================== TEXT COLORS ==================== */
 .label {
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-weight: 600;
     -fx-font-size: 18px;
 }
 
 .form-title {
-    -fx-text-fill:#e995dc; 
+    -fx-text-fill:#ebaae1; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 22px;
     -fx-font-weight: 700;
@@ -45,12 +45,12 @@
 
 /* ==================== APP NAME ==================== */
 .cozy-mode-badge {
-    -fx-text-fill: #efe4ff;
+    -fx-text-fill: #ada6b8;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: 400;
     -fx-letter-spacing: 1px;
-    -fx-background-color: #f6cbff; 
+    -fx-background-color: #fae0ff; 
     -fx-padding: 8 20 8 20;
     -fx-background-radius: 32;
     -fx-border-radius: 32;
@@ -58,7 +58,7 @@
 }
 
 .cozy-mode-badge:hover {
-    -fx-background-color: #e1d9f1;
+    -fx-background-color: #fceaff;
 }
 
 .main-icon {
@@ -82,7 +82,7 @@
 
 /* ==================== MAIN HEADINGS ==================== */
 .main-heading {
-    -fx-text-fill: #e995dc;
+    -fx-text-fill: #ebaae1;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 36px;
     -fx-font-weight: 900;
@@ -122,13 +122,13 @@
 
 /* ==================== PRIMARY BUTTONS ==================== */
 .default-primary-button {
-    -fx-background-color: #e995dc; 
+    -fx-background-color: #ebaae1; 
     -fx-text-fill: #f4f0f5; 
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-font-size: 16px;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
     -fx-effect: null;
     -fx-cursor: hand;
 }
@@ -144,7 +144,7 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-font-size: 16px;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
     -fx-effect: null;
 }
 
@@ -156,14 +156,14 @@
 
 /* ==================== MODE TOGGLE ==================== */
 .mode-toggle {
-    -fx-background-color: #ddd3f0; 
+    -fx-background-color: #fae0ff; 
     -fx-border-color: transparent;
     -fx-border-radius: 14;
     -fx-background-radius: 14;
 }
 
 .mode-toggle-button {
-    -fx-background-color: #ddd3f0;
+    -fx-background-color: #fae0ff;
     -fx-text-fill: #8e6ca1; 
     -fx-font-size: 16px;
     -fx-font-weight: 600;
@@ -176,14 +176,14 @@
 }
 
 .mode-toggle-button:hover {
-    -fx-background-color: #c7b4e9;
-    -fx-border-color: #c6b2d1;
+    -fx-background-color: #fceaff;
+    -fx-font-weight: 700;
 }
 
 .mode-toggle-button.selected {
-    -fx-background-color: #e995dc; 
+    -fx-background-color: #ebaae1; 
     -fx-text-fill: #f4f0f5; 
-    -fx-border-color: #d6ccdf;
+    -fx-font-weight: 700;
 }
 
 /* ==================== INPUT FIELDS ==================== */
@@ -195,7 +195,7 @@
     -fx-background-radius: 12;
     -fx-padding: 8 12 8 30;
     -fx-font-size: 16px;
-    -fx-text-fill: #4d324d; 
+    -fx-text-fill: #7d3a57; 
     -fx-font-weight: 400;
     -fx-prompt-text-fill: #916c94; 
     -fx-effect: null;
@@ -208,15 +208,15 @@
     -fx-border-radius: 12, 16;
     -fx-background-color: #f1e6f1;
     -fx-font-size: 16px;
-    -fx-text-fill: #4e2e3e; 
+    -fx-text-fill: #7d3a57; 
     -fx-font-weight: 400;
     -fx-prompt-text-fill: #ab8eac;
 }
 
 /* ==================== AUTH CARD ==================== */
 .default-auth-card {
-    -fx-background-color: #fae0ff; 
-    -fx-border-color: #f7c6fd;
+    -fx-background-color: #fbeefd; 
+    -fx-border-color: #d4c7d9;
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
@@ -224,27 +224,18 @@
 
 /* ==================== FEATURE CARDS ==================== */
 .default-feature-card {
-    -fx-background-color: #fae0ff;
-    -fx-border-color: #f7c6fd;
+    -fx-background-color: #fbeefd;
+    -fx-border-color: #d4c7d9;
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
 }
 
-.default-feature-card-emoji {
-    -fx-font-size: 20px;
-    -fx-text-fill: #e995dc;
-    -fx-padding: 0 0 0 8; 
-    -fx-background-color: transparent;
-    -fx-label-padding: 0;
-    -fx-alignment: center;
-}
-
 .default-feature-card-title {
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 16px;
-    -fx-font-weight: 400;
+    -fx-font-weight: 700;
     -fx-padding: 2 0 0 0;
 }
 
@@ -252,13 +243,13 @@
     -fx-text-fill: #e0acd8; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 12px;
-    -fx-font-weight: 100;
+    -fx-font-weight: 400;
 }
 
 /* ==================== SIDEBAR ==================== */
 .default-sidebar {
-    -fx-background-color: #fae0ff; 
-    -fx-border-color: #f7c6fd; 
+    -fx-background-color: #fbeefd; 
+    -fx-border-color: #d4c7d9; 
 }
 
 .sidebar-logo-icon {
@@ -280,7 +271,7 @@
 }
 
 .sidebar-toggle-button {
-    -fx-background-color: #fae0ff;
+    -fx-background-color: #fbeefd;
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -308,14 +299,14 @@
 }
 
 .sidebar-navigation {
-    -fx-background-color: #fae0ff; 
-    -fx-border-color: #f7c6fd;
+    -fx-background-color: #fbeefd; 
+    -fx-border-color: #d4c7d9;
     -fx-border-width: 1 0 1 1;
 }
 
 .sidebar-nav-button {
-    -fx-background-color: #fae0ff;
-    -fx-border-color: #f7c6fd;
+    -fx-background-color: #fbeefd;
+    -fx-border-color: #d4c7d9;
     -fx-border-width: 1; 
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -342,8 +333,8 @@
 }
 
 .sidebar-footer {
-    -fx-background-color: #fae0ff;
-    -fx-border-color: #f7c6fd; 
+    -fx-background-color: #fbeefd;
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 1 1 0 1; 
     -fx-min-height: 64px;
     -fx-pref-height: 64px;
@@ -368,8 +359,8 @@
 
 /* ==================== THEME PICKER CARD ==================== */
 .theme-picker-card {
-    -fx-background-color: #fae0ff; 
-    -fx-border-color: #f7c6fd; 
+    -fx-background-color: #fbeefd; 
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 1;
     -fx-background-radius: 22;
     -fx-border-radius: 22;
@@ -378,7 +369,7 @@
 }
 
 .theme-picker-text, .theme-picker-text-icon {
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-font-weight: 700;
     -fx-font-size: 18px;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
@@ -390,10 +381,10 @@
 }
 
 .theme-picker-option {
-    -fx-background-color: #fae0ff; 
+    -fx-background-color: #fbeefd; 
     -fx-background-radius: 14;
     -fx-border-radius: 14;
-    -fx-border-color: #f7c6fd; 
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 2;
     -fx-cursor: hand;
     -fx-effect: null;
@@ -413,7 +404,7 @@
 }
 
 .theme-picker-option.theme-picker-option-active {
-    -fx-background-color: #e995dc; 
+    -fx-background-color: #ebaae1; 
     -fx-effect: null;
 }
 
@@ -440,14 +431,14 @@
 }
 
 .theme-picker-active-badge {
-    -fx-border-color: #f7c6fd; 
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 1 0 0 0;
     -fx-padding: 12 0 0 0;
     -fx-background-color: transparent;
 }
 
 .theme-picker-scroll-hidden-bar {
-    -fx-background-color: #fae0ff; 
+    -fx-background-color: #fbeefd; 
 }
 
 .theme-picker-scroll-hidden-bar .scroll-bar:vertical {
@@ -456,7 +447,7 @@
     -fx-pref-width: 0;
     -fx-min-width: 0;
     -fx-padding: 0;
-    -fx-background-color: #fae0ff;
+    -fx-background-color: #fbeefd;
 }
 
 .theme-picker-scroll-hidden-bar .thumb,
@@ -468,17 +459,17 @@
     -fx-pref-width: 0;
     -fx-min-width: 0;
     -fx-padding: 0;
-    -fx-background-color: #fae0ff;
+    -fx-background-color: #fbeefd;
 }
 
 .theme-picker-scroll-hidden-bar .viewport {
-    -fx-background-color: #fae0ff; 
+    -fx-background-color: #fbeefd; 
 }
 
 /* ================== PREVIEW CARD =================== */
 .preview-card {
-    -fx-background-color: #faddfa;
-    -fx-border-color: #f7c6fd; 
+    -fx-background-color: #fae0ff;
+    -fx-border-color: #d4c7d9; 
     -fx-border-width: 0 1 1 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
@@ -486,14 +477,14 @@
 }
 
 .preview-card-header {
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 18px;
     -fx-font-weight: 900;
 }
 
 .preview-card-item {
-    -fx-background-color: #f8e4f8;
+    -fx-background-color: #f5e1f9ee;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-padding: 8;
@@ -502,7 +493,7 @@
 }
 
 .preview-card-item:hover {
-    -fx-background-color: #f0dcf7; 
+    -fx-background-color: #f5e1f9ce; 
 }
 
 .preview-card-icon {
@@ -517,14 +508,14 @@
     -fx-text-fill: #e78fda; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 15px;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
 }
 
 .preview-card-description {
     -fx-text-fill: #e0acd8; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 12px;
-    -fx-font-weight: 100;
+    -fx-font-weight: 400;
 }
 
 /* ==================== DEBUG STYLES ==================== */
@@ -545,7 +536,7 @@
 /* ==================== ICONS ==================== */
 .input-emoji-inside-left {
     -fx-font-size: 18px;
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-padding: 0 0 0 8; 
     -fx-background-color: transparent;
     -fx-label-padding: 0;
@@ -553,7 +544,7 @@
 
 .input-emoji-inside-right {
     -fx-font-size: 16px;
-    -fx-text-fill: #e995dc; 
+    -fx-text-fill: #ebaae1; 
     -fx-padding: 0 8 0 0;
     -fx-background-color: transparent;
     -fx-label-padding: 0;
