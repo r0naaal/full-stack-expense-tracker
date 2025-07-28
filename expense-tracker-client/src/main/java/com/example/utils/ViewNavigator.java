@@ -3,12 +3,8 @@ package com.example.utils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-// This class is intended to handle navigation between different views in the application
-// it provides methods to switch between views, manage the current view, and possibly handle view transitions.
-
 public class ViewNavigator {
-    // a stage is the window or JFrame
-    private static Stage mainStage; // only getting updated within this class
+    private static Stage mainStage;
     
     public static void setMainStage(Stage stage){
         mainStage = stage; 
@@ -18,6 +14,7 @@ public class ViewNavigator {
     public static void switchViews(Scene scene){
         if (mainStage != null) {
             mainStage.setScene(scene);
+            mainStage.setFullScreen(true);
             mainStage.show();
         }
     }

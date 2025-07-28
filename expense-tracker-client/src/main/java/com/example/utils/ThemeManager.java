@@ -1,8 +1,5 @@
 package com.example.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ThemeManager {
     private static ThemeManager instance;
     private String currentTheme;
@@ -33,6 +30,7 @@ public class ThemeManager {
     private void notifyThemeChange() {
         if (activeListener != null) {
             activeListener.onThemeChanged(currentTheme);
+            System.out.println("notified theme change with: " + currentTheme);
         }
     }
 

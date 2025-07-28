@@ -1,18 +1,17 @@
 package com.example.views;
 
 import com.example.controllers.AuthController;
-import com.example.controllers.DashboardController;
 import com.example.utils.SidebarUtil;
 import com.example.utils.ThemeManager;
-import com.example.utils.Utilities;
 import com.example.utils.ViewNavigator;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
 
 public class AuthView implements ThemeManager.ThemeChangeListener {
@@ -47,14 +46,13 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
     private VBox brandingColumn;
     private VBox authCard;
     private VBox sidebar;
-    private HBox sidebarHeader;
     private HBox topBar;
 
     public void show(String theme) {
-        // Register this view as the active listener
+        // register this view as the active listener
         ThemeManager.getInstance().setActiveListener(this);
     
-        // FIXED: Use current theme from ThemeManager if no specific theme provided
+        // use current theme from ThemeManager if no specific theme provided
         String currentTheme = (theme != null) ? theme : ThemeManager.getInstance().getCurrentTheme();
         
         currentScene = createScene(currentTheme);
@@ -97,7 +95,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         VBox contentArea = createContentArea();
         mainContainer.setCenter(contentArea);        
         
-        return new Scene(mainContainer, Utilities.APP_WIDTH, Utilities.APP_HEIGTH);
+        return new Scene(mainContainer);
     }
 
     private VBox createContentArea() {
@@ -106,7 +104,6 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         
         // Top bar with dynamic title
         topBar = createTopBar();
-        // TODO: add style to topBar
 
         // Main content with auth forms
         VBox mainContent = createMainContent();
@@ -131,6 +128,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         pageTitle.getStyleClass().add("form-title");
         
         Label cozyBadge = new Label("Cozy Mode");
+        cozyBadge.getStyleClass().clear();
         cozyBadge.getStyleClass().add("cozy-mode-badge");
         
         Region spacer = new Region();
@@ -192,8 +190,11 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         HBox logoSection = new HBox(12);
         logoSection.setAlignment(Pos.CENTER_LEFT);
         
-        Label logoIcon = new Label("☕");
-        logoIcon.getStyleClass().add("main-icon");
+        SVGPath logoIcon = new SVGPath();
+        logoIcon.setContent("M15 10C15 9.45 15.45 9 16 9C16.55 9 17 9.45 17 10S16.55 11 16 11 15 10.55 15 10M22 7.5V14.47L19.18 15.41L17.5 21H12V19H10V21H4.5C4.5 21 2 12.54 2 9.5S4.46 4 7.5 4H12.5C13.41 2.79 14.86 2 16.5 2C17.33 2 18 2.67 18 3.5C18 3.71 17.96 3.9 17.88 4.08C17.74 4.42 17.62 4.81 17.56 5.23L19.83 7.5H22M20 9.5H19L15.5 6C15.5 5.35 15.59 4.71 15.76 4.09C14.79 4.34 14 5.06 13.67 6H7.5C5.57 6 4 7.57 4 9.5C4 11.38 5.22 16.15 6 19H8V17H14V19H16L17.56 13.85L20 13.03V9.5Z");
+        logoIcon.setFill(Color.valueOf("#000000")); // black
+        logoIcon.setScaleX(1.8);
+        logoIcon.setScaleY(1.8);
         
         Label appName = new Label("CozyTracker");
         appName.getStyleClass().add("logo-text");
@@ -232,10 +233,22 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         featuresGrid.setAlignment(Pos.CENTER_LEFT);
         featuresGrid.setPadding(new Insets(40, 0, 0, 0));
         
-        VBox card1 = createFeatureCard("📊", "Smart Analytics", "Track spending patterns with beautiful charts");
-        VBox card2 = createFeatureCard("🎯", "Budget Goals", "Set and achieve your financial targets");
-        VBox card3 = createFeatureCard("💳", "Category Tracking", "Track your spending by category");
-        VBox card4 = createFeatureCard("💰", "Monthly Reports", "Get insights into your spending habits");
+        SVGPath analyticsIcon = new SVGPath();
+        analyticsIcon.setContent("M9 17H7V10H9V17M13 17H11V7H13V17M17 17H15V13H17V17M19 19H5V5H19V19.1M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z");
+
+        SVGPath targetIcon = new SVGPath();
+        targetIcon.setContent("M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,10.84 21.79,9.69 21.39,8.61L19.79,10.21C19.93,10.8 20,11.4 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.6,4 13.2,4.07 13.79,4.21L15.4,2.6C14.31,2.21 13.16,2 12,2M19,2L15,6V7.5L12.45,10.05C12.3,10 12.15,10 12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12C14,11.85 14,11.7 13.95,11.55L16.5,9H18L22,5H19V2M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12H16A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8V6Z");
+
+        SVGPath categoryIcon = new SVGPath();
+        categoryIcon.setContent("M14,6H22V22H14V6M2,4H22V2H2V4M2,8H12V6H2V8M9,22H12V10H9V22M2,22H7V10H2V22Z");
+
+        SVGPath reportIcon = new SVGPath();
+        reportIcon.setContent("M12.04,2.5L9.53,5H14.53L12.04,2.5M4,7V20H20V7H4M12,0L17,5V5H20A2,2 0 0,1 22,7V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V7A2,2 0 0,1 4,5H7V5L12,0M7,18V14H12V18H7M14,17V10H18V17H14M6,12V9H11V12H6Z");
+
+        VBox card1 = createFeatureCard(analyticsIcon, "Smart Analytics", "Track spending patterns with beautiful charts");
+        VBox card2 = createFeatureCard(targetIcon, "Budget Goals", "Set and achieve your financial targets");
+        VBox card3 = createFeatureCard(categoryIcon, "Category Tracking", "Track your spending by category");
+        VBox card4 = createFeatureCard(reportIcon, "Monthly Reports", "Get insights into your spending habits");
         
         featuresGrid.add(card1, 0, 0);
         featuresGrid.add(card2, 1, 0);
@@ -245,7 +258,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         return featuresGrid;
     }
 
-    private VBox createFeatureCard(String emoji, String title, String description) {
+    private VBox createFeatureCard(SVGPath icon, String title, String description) {
         VBox card = new VBox(4);
         card.getStyleClass().add("default-feature-card");
         card.setAlignment(Pos.CENTER_LEFT   );
@@ -253,8 +266,11 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         card.setPrefWidth(320);
         card.setPrefHeight(120);
         
-        Label emojiLabel = new Label(emoji);
-        emojiLabel.getStyleClass().add("default-feature-card-emoji");
+        SVGPath clonIcon = new SVGPath();
+        clonIcon.setContent(icon.getContent());
+        clonIcon.setFill(Color.valueOf("#000000"));
+        clonIcon.setScaleX(1.1);
+        clonIcon.setScaleY(1.1);
         
         Label titleLabel = new Label(title);
         titleLabel.getStyleClass().add("default-feature-card-title");
@@ -264,10 +280,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         descLabel.getStyleClass().add("default-feature-card-description");
         descLabel.setWrapText(true);
         
-        card.getChildren().addAll(emojiLabel, titleLabel, descLabel);
-        
-        // Add hover animation
-        addHoverAnimation(card);
+        card.getChildren().addAll(clonIcon, titleLabel, descLabel);
         
         return card;
     }
@@ -299,14 +312,18 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
 
     private VBox createFormHeader() {
         VBox formHeader = new VBox();
+        formHeader.setPadding(new Insets(10,0,0,0));
         formHeader.setAlignment(Pos.CENTER);
         
-        Label formIcon = new Label("💳");
-        formIcon.getStyleClass().clear();
-        formIcon.getStyleClass().add("form-icon");
-        
+        SVGPath formIcon = new SVGPath();
+        formIcon.setContent("M15 10C15 9.45 15.45 9 16 9C16.55 9 17 9.45 17 10S16.55 11 16 11 15 10.55 15 10M22 7.5V14.47L19.18 15.41L17.5 21H12V19H10V21H4.5C4.5 21 2 12.54 2 9.5S4.46 4 7.5 4H12.5C13.41 2.79 14.86 2 16.5 2C17.33 2 18 2.67 18 3.5C18 3.71 17.96 3.9 17.88 4.08C17.74 4.42 17.62 4.81 17.56 5.23L19.83 7.5H22M20 9.5H19L15.5 6C15.5 5.35 15.59 4.71 15.76 4.09C14.79 4.34 14 5.06 13.67 6H7.5C5.57 6 4 7.57 4 9.5C4 11.38 5.22 16.15 6 19H8V17H14V19H16L17.56 13.85L20 13.03V9.5Z");
+        formIcon.setFill(Color.valueOf("#000000"));
+        formIcon.setScaleX(1.5);
+        formIcon.setScaleY(1.5);
+
         Label formTitle = new Label(isLoginMode ? "Welcome Back" : "Join CozyTracker");
         formTitle.getStyleClass().add("form-title");
+        formTitle.setPadding(new Insets(5,0,0,0));
 
         Label formSubtitle = new Label(isLoginMode ? "Sign in to your account" : "Create your account");
         formSubtitle.getStyleClass().add("form-subtitle");
@@ -350,19 +367,27 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
     private VBox createLoginFields() {
         VBox loginFields = new VBox(10);
         loginFields.setAlignment(Pos.TOP_CENTER);
+
+        SVGPath loginEmailIcon = new SVGPath();
+        loginEmailIcon.setContent("M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z");
+        loginEmailIcon.setFill(Color.valueOf("#000000b6"));
         
+        SVGPath loginPasswordIcon = new SVGPath();
+        loginPasswordIcon.setContent("M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z");
+        loginPasswordIcon.setFill(Color.valueOf("#000000b6"));
+
         // Email field
         Label emailLabel = new Label("Email");
         emailLabel.getStyleClass().add("default-field-label");
 
-        VBox emailGroup = new VBox(4, emailLabel, createIconField("📧", loginEmailField));
+        VBox emailGroup = new VBox(4, emailLabel, createIconField(loginEmailIcon, loginEmailField));
         emailGroup.setAlignment(Pos.TOP_LEFT);
 
         // Password field
         Label passwordLabel = new Label("Password");
         passwordLabel.getStyleClass().add("default-field-label");
         
-        VBox passwordGroup = new VBox(4, passwordLabel, createIconField("🔒", loginPasswordField));
+        VBox passwordGroup = new VBox(4, passwordLabel, createIconField(loginPasswordIcon, loginPasswordField));
         passwordGroup.setAlignment(Pos.TOP_LEFT);
 
         // Remember me checkbox
@@ -385,16 +410,39 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         VBox signupFields = new VBox(10);
         signupFields.setAlignment(Pos.TOP_CENTER);
 
+        // load the svg icon
+        SVGPath firstNameIcon = new SVGPath();
+        firstNameIcon.setContent("M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z");
+        firstNameIcon.setFill(Color.valueOf("#000000b6"));
+
+        SVGPath lastNameIcon = new SVGPath();
+        lastNameIcon.setContent("M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z");
+        lastNameIcon.setFill(Color.valueOf("#000000b6"));
+
+        SVGPath signupEmailIcon = new SVGPath();
+        signupEmailIcon.setContent("M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z");
+        signupEmailIcon.setFill(Color.valueOf("#000000b6"));
+
+        SVGPath signupPasswordIcon = new SVGPath();
+        signupPasswordIcon.setContent("M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z");
+        signupPasswordIcon.setFill(Color.valueOf("#000000b6"));
+
+        SVGPath confirmPasswordIcon = new SVGPath();
+        confirmPasswordIcon.setContent("M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z");
+        confirmPasswordIcon.setFill(Color.valueOf("#000000b6"));
+
         // Name fields
         HBox nameRow = new HBox(12);
+
         Label firstNameLabel = new Label("First Name");
         firstNameLabel.getStyleClass().add("default-field-label");
-        VBox firstNameGroup = new VBox(4, firstNameLabel, createIconField("👤", firstNameField));
+
+        VBox firstNameGroup = new VBox(4, firstNameLabel, createIconField(firstNameIcon, firstNameField));
         firstNameGroup.setAlignment(Pos.TOP_LEFT);
 
         Label lastNameLabel = new Label("Last Name");
         lastNameLabel.getStyleClass().add("default-field-label");
-        VBox lastNameGroup = new VBox(4, lastNameLabel, createIconField("👤", lastNameField));
+        VBox lastNameGroup = new VBox(4, lastNameLabel, createIconField(lastNameIcon, lastNameField));
         lastNameGroup.setAlignment(Pos.TOP_LEFT);
 
         firstNameField.setPromptText("Gabi");
@@ -404,18 +452,18 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         // Email field
         Label emailLabel = new Label("Email");
         emailLabel.getStyleClass().add("default-field-label");
-        VBox emailGroup = new VBox(4, emailLabel, createIconField("📧", signupEmailField));
+        VBox emailGroup = new VBox(4, emailLabel, createIconField(signupEmailIcon, signupEmailField));
         emailGroup.setAlignment(Pos.TOP_LEFT);
         
         // Password fields
         Label passwordLabel = new Label("Password");
         passwordLabel.getStyleClass().add("default-field-label");
-        VBox passwordGroup = new VBox(4, passwordLabel, createIconField("🔒", signupPasswordField));
+        VBox passwordGroup = new VBox(4, passwordLabel, createIconField(signupPasswordIcon, signupPasswordField));
         passwordGroup.setAlignment(Pos.TOP_LEFT);
 
         Label confirmPasswordLabel = new Label("Confirm Password");
         confirmPasswordLabel.getStyleClass().add("default-field-label");
-        VBox confirmPasswordGroup = new VBox(4, confirmPasswordLabel, createIconField("🔒", confirmPasswordField));
+        VBox confirmPasswordGroup = new VBox(4, confirmPasswordLabel, createIconField(confirmPasswordIcon, confirmPasswordField));
         confirmPasswordGroup.setAlignment(Pos.TOP_LEFT);
 
         // Terms checkbox
@@ -426,7 +474,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         signupButton.setPrefWidth(380);
         signupButton.setPrefHeight(40);
         
-        signupEmailField.setPromptText("Gabi@example.com");
+        signupEmailField.setPromptText("Ronal@example.com");
         signupPasswordField.setPromptText("Password");
         confirmPasswordField.setPromptText("Confirm Password");
         
@@ -434,34 +482,15 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         return signupFields;
     }
 
-    private StackPane createIconField(String emoji, TextInputControl field) {
-        // Emoji label
-        Label icon = new Label(emoji);
-        icon.getStyleClass().add("input-emoji-inside-left");
-        icon.setMouseTransparent(true); // So it doesn't block input
-
+    private StackPane createIconField(SVGPath svgIcon, TextInputControl field) {
         field.getStyleClass().add("default-text-field");
 
-        StackPane stack = new StackPane(field, icon);
+        StackPane stack = new StackPane(field, svgIcon);
         stack.setAlignment(Pos.CENTER_LEFT);
         stack.getStyleClass().add("icon-field-stack");
-        return stack;
-    }
 
-    private void addHoverAnimation(VBox card) {
-        card.setOnMouseEntered(e -> {
-            ScaleTransition scale = new ScaleTransition(Duration.millis(200), card);
-            scale.setToX(1.02);
-            scale.setToY(1.02);
-            scale.play();
-        });
-        
-        card.setOnMouseExited(e -> {
-            ScaleTransition scale = new ScaleTransition(Duration.millis(200), card);
-            scale.setToX(1.0);
-            scale.setToY(1.0);
-            scale.play();
-        });
+        svgIcon.setTranslateX(10);
+        return stack;
     }
 
     public void switchToLoginMode() {

@@ -53,7 +53,7 @@
     -fx-font-size: 13px;
     -fx-font-weight: 400;
     -fx-letter-spacing: 1px;
-    -fx-background-color: #d1e3da;
+    -fx-background-color: #e9f0ea;
     -fx-padding: 8 20 8 20;
     -fx-background-radius: 32;
     -fx-border-radius: 32;
@@ -65,7 +65,7 @@
 }
 
 .main-icon {
-    -fx-font-size: 26px;
+    -fx-font-size: 30px;
     -fx-text-fill: #f5f4f0;
     -fx-background-color: #9c6c4b; 
     -fx-border-radius: 5;
@@ -207,7 +207,7 @@
     -fx-border-width: 2;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
-    -fx-padding: 8 12 8 30;
+    -fx-padding: 8 12 8 35;
     -fx-font-size: 16px;
     -fx-text-fill: #4d3d32;
     -fx-font-weight: 400;
@@ -281,7 +281,7 @@
 .sidebar-logo-icon {
     -fx-font-size: 25px;
     -fx-text-fill: #f5f4f0;
-    -fx-padding: 0 8 0 8; 
+    -fx-padding: 0 0 0 20; 
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: #9b6c4b;
@@ -303,7 +303,7 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-cursor: hand;
-    -fx-padding: 4 12 4 12;
+    -fx-padding: 12 16 12 16;
     -fx-effect: null;
     -fx-alignment: center;
 }
@@ -340,6 +340,8 @@
     -fx-border-width: 1;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #d9d2c7;
     -fx-cursor: hand;
 
 }
@@ -349,11 +351,11 @@
 }
 
 .sidebar-nav-button:pressed {
-    -fx-background-color: #d6cbb7;
+    -fx-background-color: #e0d7c7;
 }
 
 .sidebar-nav-button.sidebar-nav-button-active {
-    -fx-background-color: #d6cbb7;
+    -fx-background-color: #e0d7c7;
 }
 
 .sidebar-nav-button-text {
@@ -362,6 +364,8 @@
     -fx-font-size: 16px;
     -fx-font-weight: 400;
 }
+
+/* ==================== SIDEBAR FOOTER ==================== */
 
 .sidebar-footer {
     -fx-background-color: #f4f1ec;
@@ -405,12 +409,6 @@
     -fx-font-size: 18px;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
-
-.theme-picker-text-icon {
-    -fx-font-size: 20px;
-    -fx-padding: 0 8 0 0;
-}
-
 
 .theme-picker-option {
     -fx-background-color: #f5f4f0;
@@ -528,14 +526,6 @@
     -fx-background-color: #e5e9e4;
 }
 
-.preview-card-icon {
-    -fx-font-size: 18px;
-    -fx-text-fill: #815331;
-    -fx-padding: 0 8 0 0; 
-    -fx-background-color: transparent;
-    -fx-label-padding: 0;
-}
-
 .preview-card-title {
     -fx-text-fill: #815331;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
@@ -576,12 +566,6 @@
     -fx-border-width: 2px;
 }
 
-
-/* ==================== ANIMATIONS ==================== */
-
-/* (Add your animation rules here) */
-
-
 /* ==================== ICONS ==================== */
 .input-emoji-inside-left {
     -fx-font-size: 18px;
@@ -613,16 +597,16 @@
     -fx-max-width: 20px;
     -fx-max-height: 20px;
     -fx-alignment: center;
-    -fx-mark-color: #9c6c4b; /* accent color for checkmark when unchecked */
-    -fx-mark-width: 3px; /* make checkmark thicker */
-    -fx-mark-height: 12px; /* make checkmark larger */
+    -fx-mark-color: #9c6c4b;
+    -fx-mark-width: 3px; 
+    -fx-mark-height: 12px; 
 }
 
 .default-checkbox:selected > .box,
 .default-checkbox:pressed > .box {
     -fx-background-color: #9c6c4b;
     -fx-border-color: #9c6c4b;
-    -fx-mark-color: #f5f2ed; /* light checkmark when checked */
+    -fx-mark-color: #f5f2ed; 
 }
 
 .default-checkbox .text {
@@ -630,4 +614,269 @@
     -fx-font-size: 15px;
     -fx-font-weight: 500;
     -fx-padding: 0 0 0 8;
+}
+
+/* ==================== DASHBOARD SCROLL PANE STYLES ==================== */
+
+.dashboard-content-scroll {
+    -fx-background-color: #f5f2ed; 
+}
+
+.dashboard-content-scroll .scroll-bar:vertical {
+    -fx-opacity: 0; 
+    -fx-max-width: 0;
+    -fx-pref-width: 0; 
+    -fx-min-width: 0; 
+    -fx-padding: 0; 
+    -fx-background-color: #f5f2ed;
+}
+
+.dashboard-content-scroll .thumb,
+.dashboard-content-scroll .track,
+.dashboard-content-scroll .increment-button,
+.dashboard-content-scroll .decrement-button {
+    -fx-opacity: 0;
+    -fx-max-width: 0; 
+    -fx-pref-width: 0; 
+    -fx-min-width: 0; 
+    -fx-padding: 0; 
+    -fx-background-color: #f5f2ed; 
+}
+
+.dashboard-content-scroll .viewport {
+    -fx-background-color: #f5f2ed;
+}
+
+/* ==================== DASHBOARD CONTENT CONTAINER ==================== */
+.content-container-vbox {
+    -fx-background-color: #f5f5f2;
+    -fx-alignment: top-center; 
+}
+
+.dashboard-welcome-section {
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-border-color: #d1e3da;
+    -fx-background-color: #e9f0ea;
+}
+
+.dashboard-welcome-sparkle-icon {
+    -fx-font-size: 28px;
+    -fx-text-fill: #9c6c4b;
+    -fx-padding: 0 8 0 0; 
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+}
+
+.dashboard-welcome-title {
+    -fx-text-fill: #9c6c4b;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.welcome-separator {
+    -fx-background-color: #d1e3da;
+}
+
+.welcome-description {
+    -fx-text-fill: #9c6c4b;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 400;
+}
+
+.quick-action-button {
+    -fx-background-color: #f5f5f2;
+    -fx-border-color: #d1e3da;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 12 8 12;
+    -fx-cursor: hand;
+}
+
+.quick-action-button:hover {
+    -fx-background-color: #e7e2da;
+}
+
+.quick-action-button-icon {
+    -fx-font-size: 24px;
+    -fx-font-weight: normal;
+}
+
+.quick-action-button-text {
+    -fx-text-fill: #4d3d32;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+
+/* ==================== TRACKING BOXES ==================== */
+
+.tracking-box {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 2);
+    -fx-spacing: 8px;
+}
+
+/* Emoji styling */
+.tracking-emoji {
+    -fx-font-size: 20px;
+    -fx-font-weight: normal;
+}
+
+/* Percentage styling */
+.tracking-percentage {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+}
+
+.tracking-percentage-positive {
+    -fx-text-fill: #22c55e;
+    -fx-background-color: rgba(34, 197, 94, 0.1);
+}
+
+.tracking-percentage-negative {
+    -fx-text-fill: #ef4444;
+    -fx-background-color: rgba(239, 68, 68, 0.1);
+}
+
+.tracking-percentage-neutral {
+    -fx-text-fill: #6b7280;
+    -fx-background-color: rgba(107, 114, 128, 0.1);
+}
+
+/* Main value styling */
+.tracking-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #9c6c4b;
+}
+
+/* Label styling */
+.tracking-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #6b7280;
+}
+
+
+/* ==================== TRANSACTIONS ==================== */
+
+.transaction-item-button {
+    -fx-background-color: #f5f4f0;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.transaction-item-button-hover {
+    -fx-background-color: #f5f4f0ec;
+}
+
+.transaction-title {
+    -fx-text-fill: #9b6c4b;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.transaction-category-date {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666666;
+}
+
+.transaction-amount {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.transaction-amount-negative {
+    -fx-text-fill: #d73a4ad3;
+}
+
+.transaction-amount-positive {
+    -fx-text-fill: #28a746dc;
+}
+
+.transaction-action-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 4px;
+}
+
+.transaction-action-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------- RECENT ACTIVITY ---------------------- */
+
+.recent-activity-container {
+    -fx-background-color: #f5f2ed;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 2px;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+}
+
+.widget-title {
+    -fx-text-fill: #9b6c4b;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.widget-header-container {
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.recent-activity-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1 0 0 0;
+}
+
+.recent-activity-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.recent-activity-scroll .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.see-more-button {
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #333333;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.see-more-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*-------------------MONTHLY OVERVIEW -------------------------*/
+
+.monthlyoverview-widget-container {
+    -fx-background-color: #e8e3da;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 2px;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
 }

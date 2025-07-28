@@ -1,33 +1,36 @@
+
+/* TEST COMMENT */
+
 /* ==================== DEFAULT THEME: CHERRY BLOSSOM ==================== */
 
 /* ==================== MAIN BACKGROUNDS ==================== */
-.root, .main-container, .content-area, .default-branding-column {
-    -fx-background-color: #fef4f7; /* Very light pink */
+.main-container, .content-area, .default-branding-column {
+    -fx-background-color: #fef4f7; 
 }
 
 .default-top-bar {
-    -fx-background-color: #f8bbd9; /* Soft pink */
-    -fx-border-color: #d97390; /* Light rose */
+    -fx-background-color: #f8bbd9; 
+    -fx-border-color: #d97390; 
     -fx-border-width: 1;
 }
 
 /* ==================== TEXT COLORS ==================== */
 .label {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-weight: 600;
     -fx-font-size: 18px;
 }
 
 .form-title {
-    -fx-text-fill: #c2185b; /* Medium dark rose */
+    -fx-text-fill: #c2185b; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 22px;
     -fx-font-weight: 700;
 }
 
 .form-subtitle {
-    -fx-text-fill: #f06292; /* Soft pink */
+    -fx-text-fill: #f06292; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 16px;
     -fx-font-weight: 500;
@@ -36,7 +39,7 @@
 .form-icon {
     -fx-font-size: 26px;
     -fx-text-fill: #f8bbd9; /* Light pink */
-    -fx-background-color: #d97390; /* Light rose */
+    -fx-background-color: #d97390; 
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: -1 4 -1 4; 
@@ -44,13 +47,31 @@
 }
 
 /* ==================== APP NAME ==================== */
-.app-name {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+
+.cozy-mode-badge {
+    -fx-text-fill: #491e3c;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: 400;
     -fx-letter-spacing: 1px;
-    -fx-background-color: #fce4ec; /* Very light pink */
+    -fx-background-color: #f0e9f0;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 32;
+    -fx-border-radius: 32;
+    -fx-alignment: center;
+}
+
+.cozy-mode-badge:hover {
+    -fx-background-color: #e3d1e0b7;
+}
+
+.app-name {
+    -fx-text-fill: #bf5a7a; 
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+    -fx-letter-spacing: 1px;
+    -fx-background-color: #fce4ec; 
     -fx-padding: 8 20 8 20;
     -fx-background-radius: 32;
     -fx-border-radius: 32;
@@ -58,13 +79,13 @@
 }
 
 .app-name:hover {
-    -fx-background-color: #f8bbd9; /* Soft pink on hover */
+    -fx-background-color: #f8bbd9; 
 }
 
 .main-icon {
     -fx-font-size: 26px;
     -fx-text-fill: #f8bbd9; /* Light pink */
-    -fx-background-color: #d97390; /* Light rose */
+    -fx-background-color: #d97390; 
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: -1 8 -1 8; 
@@ -73,7 +94,7 @@
 }
 
 .logo-text {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 22px;
     -fx-font-weight: 700;
@@ -82,7 +103,7 @@
 
 /* ==================== MAIN HEADINGS ==================== */
 .main-heading {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 36px;
     -fx-font-weight: 900;
@@ -91,7 +112,7 @@
 }
 
 .default-accent-heading {
-    -fx-text-fill: #f06292; /* Soft pink */
+    -fx-text-fill: #f06292; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 28px;
     -fx-font-weight: 900;
@@ -99,21 +120,21 @@
 }
 
 .description-text {
-    -fx-text-fill: #ad1457; /* Dark rose */
+    -fx-text-fill: #ad1457; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 18px;
     -fx-letter-spacing: 2px;
 }
 
 .default-field-label {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: 600;
 }
 
 .hint-text {
-    -fx-text-fill: #d97390; /* Light rose */
+    -fx-text-fill: #d97390; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: 400;
@@ -122,8 +143,8 @@
 
 /* ==================== PRIMARY BUTTONS ==================== */
 .default-primary-button {
-    -fx-background-color: #f06292; /* Soft pink */
-    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-background-color: #f06292; 
+    -fx-text-fill: #f5f4f0; 
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -134,12 +155,12 @@
 }
 
 .default-primary-button:hover {
-    -fx-background-color: #c2185b; /* Medium dark rose on hover */
+    -fx-background-color: #c2185b; 
 }
 
 .default-primary-button:pressed {
-    -fx-background-color: #ad1457; /* Dark rose */
-    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-background-color: #ad1457; 
+    -fx-text-fill: #f5f4f0; 
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -149,22 +170,22 @@
 }
 
 .default-primary-button:disabled {
-    -fx-background-color: #d97390; /* Light rose */
-    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-background-color: #d97390; 
+    -fx-text-fill: #f5f4f0; 
     -fx-opacity: 0.6;
 }
 
 /* ==================== MODE TOGGLE ==================== */
 .mode-toggle {
-    -fx-background-color: #fce4ec; /* Very light pink */
+    -fx-background-color: #fce4ec; 
     -fx-border-color: transparent;
     -fx-border-radius: 14;
     -fx-background-radius: 14;
 }
 
 .mode-toggle-button {
-    -fx-background-color: #fce4ec; /* Very light pink */
-    -fx-text-fill: #f06292; /* Soft pink */
+    -fx-background-color: #fce4ec; 
+    -fx-text-fill: #f06292; 
     -fx-font-size: 16px;
     -fx-font-weight: 600;
     -fx-background-radius: 10;    
@@ -176,47 +197,47 @@
 }
 
 .mode-toggle-button:hover {
-    -fx-background-color: #f8bbd9; /* Soft pink on hover */
-    -fx-border-color: #d1c3b2;
+    -fx-background-color: #f8bbd9; 
+    -fx-border-color: #d1b2d1;
 }
 
 .mode-toggle-button.selected {
-    -fx-background-color: #f06292; /* Soft pink when selected */
-    -fx-text-fill: #f5f4f0; /* Light text */
+    -fx-background-color: #f06292; 
+    -fx-text-fill: #f5f4f0; 
     -fx-border-color: #f06292;
 }
 
 /* ==================== INPUT FIELDS ==================== */
 .default-text-field, .default-password-field {
-    -fx-background-color: #f5f4f0; /* Light background */
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-background-color: #f5f4f0; 
+    -fx-border-color: #d3c7d9; 
     -fx-border-width: 2;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
     -fx-padding: 8 12 8 30;
     -fx-font-size: 16px;
-    -fx-text-fill: #4d3d32; /* Darker text */
+    -fx-text-fill: #4c324d; 
     -fx-font-weight: 400;
-    -fx-prompt-text-fill: #947d6c; /* Soft brown */
+    -fx-prompt-text-fill: #946c91; 
     -fx-effect: null;
 }
 
 .default-text-field:focused, .default-password-field:focused {
-    -fx-border-color: #f06292, #c2185b; /* Inner, outer */
-    -fx-border-width: 1, 2;             /* Inner, outer */
-    -fx-border-insets: 0, -4;           /* Inner, outer */
-    -fx-border-radius: 12, 16;          /* Match background radius */
-    -fx-background-color: #f5f4f0;
+    -fx-border-color: #f06292, #c2185b; 
+    -fx-border-width: 1, 2;             
+    -fx-border-insets: 0, -4;           
+    -fx-border-radius: 12, 16;          
+    -fx-background-color: #f5f0f5;
     -fx-font-size: 16px;
-    -fx-text-fill: #4e342e; /* Darker text on focus */
+    -fx-text-fill: #c2185b; 
     -fx-font-weight: 400;
-    -fx-prompt-text-fill: #f8bbd9; /* Soft pink for prompt */
+    -fx-prompt-text-fill: #f8bbd9; 
 }
 
 /* ==================== AUTH CARD ==================== */
 .default-auth-card {
-    -fx-background-color: #f8bbd9; /* Soft pink */
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-background-color: #f8bbd9; 
+    -fx-border-color: #d3c7d9; 
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
@@ -224,8 +245,8 @@
 
 /* ==================== FEATURE CARDS ==================== */
 .default-feature-card {
-    -fx-background-color: #fce4ec; /* Very light pink */
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-background-color: #fce4ec; 
+    -fx-border-color: #d3c7d9; 
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
@@ -233,7 +254,7 @@
 
 .default-feature-card-emoji {
     -fx-font-size: 20px;
-    -fx-text-fill: #f06292; /* Soft pink */
+    -fx-text-fill: #f06292; 
     -fx-padding: 0 0 0 8; 
     -fx-background-color: transparent;
     -fx-label-padding: 0;
@@ -241,7 +262,7 @@
 }
 
 .default-feature-card-title {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 16px;
     -fx-font-weight: 400;
@@ -249,7 +270,7 @@
 }
 
 .default-feature-card-description {
-    -fx-text-fill: #d97390; /* Light rose */
+    -fx-text-fill: #d97390; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 12px;
     -fx-font-weight: 100;
@@ -257,21 +278,12 @@
 
 /* ==================== SIDEBAR ==================== */
 .default-sidebar {
-    -fx-background-color: #fef4f7; /* Very light pink */
-    -fx-border-color: #d9d2c7; /* Soft gray */
-}
-
-.sidebar-logo-icon {
-    -fx-font-size: 25px;
-    -fx-text-fill: #f8bbd9; /* Light pink */
-    -fx-padding: 0 8 0 8; 
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-background-color: #f06292; /* Soft pink */
+    -fx-background-color: #fef4f7; 
+    -fx-border-color: #d3c7d9; 
 }
 
 .sidebar-title {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 20px;
     -fx-font-weight: 700;
@@ -280,18 +292,18 @@
 }
 
 .sidebar-toggle-button {
-    -fx-background-color: #fef4f7; /* Very light pink */
+    -fx-background-color: #fef4f7; 
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-cursor: hand;
-    -fx-padding: 4 12 4 12;
+    -fx-padding: 12 16 12 16;
     -fx-effect: null;
     -fx-alignment: center;
 }
 
 .sidebar-toggle-button:hover {
-    -fx-background-color: #f8bbd9; /* Soft pink on hover */
+    -fx-background-color: #f8bbd9; 
     -fx-border-color: transparent;
 }
 
@@ -303,19 +315,19 @@
 .sidebar-toggle-icon {
     -fx-font-size: 20px;
     -fx-font-weight: 900;   
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-alignment: center;
 }
 
 .sidebar-navigation {
-    -fx-background-color: #fef4f7; /* Very light pink */
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-background-color: #fef4f7; 
+    -fx-border-color: #d3c7d9; 
     -fx-border-width: 1;
 }
 
 .sidebar-nav-button {
-    -fx-background-color: #f8bbd9; /* Soft pink */
-    -fx-border-color: #dedad3;
+    -fx-background-color: #f8bbd9; 
+    -fx-border-color: #d3c7d9;
     -fx-border-width: 1;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -323,27 +335,27 @@
 }
 
 .sidebar-nav-button:hover {
-    -fx-background-color: #f06292; /* Dark rose on hover */
+    -fx-background-color: #f06292; 
 }
 
 .sidebar-nav-button:pressed {
-    -fx-background-color: #ad1457; /* Dark rose */
+    -fx-background-color: #ad1457; 
 }
 
 .sidebar-nav-button.sidebar-nav-button-active {
-    -fx-background-color: #ad1457; /* Dark rose when active */
+    -fx-background-color: #ad1457;
 }
 
 .sidebar-nav-button-text {
-    -fx-text-fill: #4d3d32; /* Darker text */
+    -fx-text-fill: #4d3d32; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 16px;
     -fx-font-weight: 400;
 }
 
 .sidebar-footer {
-    -fx-background-color: #f4f1ec; /* Light beige */
-    -fx-border-color: #dedad3; 
+    -fx-background-color: #f4f1ec; 
+    -fx-border-color: #d3c7d9; 
     -fx-border-width: 1 1 0 1; 
     -fx-min-height: 64px;
     -fx-pref-height: 64px;
@@ -351,7 +363,7 @@
 }
 
 .footer-text {
-    -fx-text-fill: #948478a9; /* Soft gray */
+    -fx-text-fill: #948478a9; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 18px; 
     -fx-font-weight: 900; 
@@ -359,17 +371,10 @@
     -fx-padding: 4;
 }
 
-.footer-icon {
-    -fx-font-size: 30px; 
-    -fx-text-fill: #948478; /* Soft gray */
-    -fx-text-weight: 600;
-    -fx-alignment: CENTER; 
-}
-
 /* ==================== THEME PICKER CARD ==================== */
 .theme-picker-card {
-    -fx-background-color: #fef4f7; /* Very light pink */
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-background-color: #fef4f7; 
+    -fx-border-color: #d9d2c7; 
     -fx-border-width: 1;
     -fx-background-radius: 22;
     -fx-border-radius: 22;
@@ -378,22 +383,17 @@
 }
 
 .theme-picker-text, .theme-picker-text-icon {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-weight: 700;
     -fx-font-size: 18px;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
-.theme-picker-text-icon {
-    -fx-font-size: 20px;
-    -fx-padding: 0 8 0 0;
-}
-
 .theme-picker-option {
-    -fx-background-color: #fce4ec; /* Very light pink */
+    -fx-background-color: #fce4ec; 
     -fx-background-radius: 14;
     -fx-border-radius: 14;
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-border-color: #d9d2c7; 
     -fx-border-width: 2;
     -fx-cursor: hand;
     -fx-effect: null;
@@ -402,52 +402,52 @@
 }
 
 .theme-picker-option:hover {
-    -fx-background-color: #f8bbd9; /* Soft pink on hover */
+    -fx-background-color: #f8bbd9; 
     -fx-effect: null;
 }
 
 .theme-picker-option:pressed {
-    -fx-background-color: #ad1457; /* Dark rose */
+    -fx-background-color: #ad1457; 
     -fx-border-width: 0;
     -fx-effect: null;
 }
 
 .theme-picker-option.theme-picker-option-active {
-    -fx-background-color: #f06292; /* Soft pink */
+    -fx-background-color: #f06292; 
     -fx-effect: null;
 }
 
 .theme-picker-option .theme-option-name {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-size: 14px;
     -fx-font-weight: 700;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
 .theme-picker-option.theme-picker-option-active .theme-option-name {
-    -fx-text-fill: #fef4f7; /* Very light pink */
+    -fx-text-fill: #fef4f7; 
 }
 
 .theme-picker-option .theme-option-desc {
-    -fx-text-fill: #786c62; /* Soft gray */
+    -fx-text-fill: #786c62; 
     -fx-font-size: 12px;
     -fx-font-weight: 600;
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
 .theme-picker-option.theme-picker-option-active .theme-option-desc {
-    -fx-text-fill: #fef4f7; /* Very light pink */
+    -fx-text-fill: #fef4f7; 
 }
 
 .theme-picker-active-badge {
-    -fx-border-color: #d9d2c7; /* Soft gray */
+    -fx-border-color: #d9d2c7; 
     -fx-border-width: 1 0 0 0;
     -fx-padding: 12 0 0 0;
     -fx-background-color: transparent;
 }
 
 .theme-picker-scroll-hidden-bar {
-    -fx-background-color: #fef4f7; /* Very light pink */
+    -fx-background-color: #fef4f7; 
 }
 
 .theme-picker-scroll-hidden-bar .scroll-bar:vertical {
@@ -456,7 +456,7 @@
     -fx-pref-width: 0;
     -fx-min-width: 0;
     -fx-padding: 0;
-    -fx-background-color: #fef4f7; /* Very light pink */
+    -fx-background-color: #fef4f7; 
 }
 
 .theme-picker-scroll-hidden-bar .thumb,
@@ -468,60 +468,52 @@
     -fx-pref-width: 0;
     -fx-min-width: 0;
     -fx-padding: 0;
-    -fx-background-color: #fef4f7; /* Very light pink */
+    -fx-background-color: #fef4f7; 
 }
 
 .theme-picker-scroll-hidden-bar .viewport {
-    -fx-background-color: #fef4f7; /* Very light pink */
+    -fx-background-color: #fef4f7; 
 }
 
 /* ================== PREVIEW CARD =================== */
 .preview-card {
-    -fx-background-color: #f8bbd9; /* Soft pink */
-    -fx-border-color: #d97390; /* Light rose */
+    -fx-background-color: #f8bbd9; 
+    -fx-border-color: #d97390; 
     -fx-border-width: 1;
     -fx-border-radius: 16;
     -fx-background-radius: 16;
-    -fx-max-width: 300; /* Set a maximum width */
+    -fx-max-width: 300; 
 }
 
 .preview-card-header {
-    -fx-text-fill: #c2185b; /* Medium dark rose */
+    -fx-text-fill: #c2185b; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 18px;
     -fx-font-weight: 900;
 }
 
 .preview-card-item {
-    -fx-background-color: #fce4ec; /* Very light pink */
+    -fx-background-color: #fce4ec; 
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-padding: 8;
-    -fx-max-width: 280; /* Set a maximum width */
-    -fx-max-height: 60; /* Set a maximum height */
+    -fx-max-width: 280; 
+    -fx-max-height: 60; 
 }
 
 .preview-card-item:hover {
-    -fx-background-color: #f8bbd9; /* Soft pink on hover */
-}
-
-.preview-card-icon {
-    -fx-font-size: 18px;
-    -fx-text-fill: #c2185b; /* Medium dark rose */
-    -fx-padding: 0 8 0 0; 
-    -fx-background-color: transparent;
-    -fx-label-padding: 0;
+    -fx-background-color: #f8bbd9; 
 }
 
 .preview-card-title {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: 600;
 }
 
 .preview-card-description {
-    -fx-text-fill: #d97390; /* Light rose */
+    -fx-text-fill: #d97390; 
     -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     -fx-font-size: 12px;
     -fx-font-weight: 100;
@@ -542,31 +534,10 @@
     -fx-border-width: 2px;
 }
 
-/* ==================== ANIMATIONS ==================== */
-
-/* (Add your animation rules here) */
-
-/* ==================== ICONS ==================== */
-.input-emoji-inside-left {
-    -fx-font-size: 18px;
-    -fx-text-fill: #d97390; /* Light rose */
-    -fx-padding: 0 0 0 8; 
-    -fx-background-color: transparent;
-    -fx-label-padding: 0;
-} 
-
-.input-emoji-inside-right {
-    -fx-font-size: 16px;
-    -fx-text-fill: #d97390; /* Light rose */
-    -fx-padding: 0 8 0 0;
-    -fx-background-color: transparent;
-    -fx-label-padding: 0;
-}
-
 /* ==================== CHECKBOXES ==================== */
 .default-checkbox > .box {
-    -fx-background-color: #fce4ec; /* Very light pink */
-    -fx-border-color: #c2185b; /* Medium dark rose */
+    -fx-background-color: #fce4ec; 
+    -fx-border-color: #c2185b; 
     -fx-border-width: 2;
     -fx-background-radius: 50%;
     -fx-border-radius: 50%;
@@ -576,21 +547,287 @@
     -fx-max-width: 20px;
     -fx-max-height: 20px;
     -fx-alignment: center;
-    -fx-mark-color: #c2185b; /* Accent color for checkmark when unchecked */
-    -fx-mark-width: 3px; /* Make checkmark thicker */
-    -fx-mark-height: 12px; /* Make checkmark larger */
+    -fx-mark-color: #c2185b; 
+    -fx-mark-width: 3px; 
+    -fx-mark-height: 12px; 
 }
 
 .default-checkbox:selected > .box,
 .default-checkbox:pressed > .box {
-    -fx-background-color: #c2185b; /* Medium dark rose when checked */
-    -fx-border-color: #c2185b; /* Medium dark rose border when checked */
-    -fx-mark-color: #fef4f7; /* Light checkmark when checked */
+    -fx-background-color: #c2185b; 
+    -fx-border-color: #c2185b; 
+    -fx-mark-color: #fef4f7;
 }
 
 .default-checkbox .text {
-    -fx-text-fill: #bf5a7a; /* Darker rose */
+    -fx-text-fill: #bf5a7a; 
     -fx-font-size: 15px;
     -fx-font-weight: 500;
     -fx-padding: 0 0 0 8;
+}
+
+
+/* ==================== DASHBOARD SCROLL PANE STYLES ==================== */
+
+.dashboard-content-scroll {
+    -fx-background-color: #f5f2ed; 
+}
+
+.dashboard-content-scroll .scroll-bar:vertical {
+    -fx-opacity: 0; 
+    -fx-max-width: 0;
+    -fx-pref-width: 0; 
+    -fx-min-width: 0; 
+    -fx-padding: 0; 
+    -fx-background-color: #f5f2ed;
+}
+
+.dashboard-content-scroll .thumb,
+.dashboard-content-scroll .track,
+.dashboard-content-scroll .increment-button,
+.dashboard-content-scroll .decrement-button {
+    -fx-opacity: 0;
+    -fx-max-width: 0; 
+    -fx-pref-width: 0; 
+    -fx-min-width: 0; 
+    -fx-padding: 0; 
+    -fx-background-color: #f5f2ed; 
+}
+
+.dashboard-content-scroll .viewport {
+    -fx-background-color: #f5f2ed;
+}
+
+/* ==================== DASHBOARD CONTENT CONTAINER ==================== */
+.content-container-vbox {
+    -fx-background-color: #f5f5f2;
+    -fx-alignment: top-center; 
+}
+
+.dashboard-welcome-section {
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-border-color: #d1e3da;
+    -fx-background-color: #e9f0ea;
+}
+
+.dashboard-welcome-sparkle-icon {
+    -fx-font-size: 28px;
+    -fx-text-fill: #9c6c4b;
+    -fx-padding: 0 8 0 0; 
+    -fx-background-color: transparent;
+    -fx-label-padding: 0;
+}
+
+.dashboard-welcome-title {
+    -fx-text-fill: #9c6c4b;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.welcome-separator {
+    -fx-background-color: purple;
+}
+
+.welcome-description {
+    -fx-text-fill: #9c6c4b;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 400;
+}
+
+.quick-action-button {
+    -fx-background-color: red;
+    -fx-border-color: #d1e3da;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 12 8 12;
+    -fx-cursor: hand;
+}
+
+.quick-action-button:hover {
+    -fx-background-color: #e7e2da;
+}
+
+.quick-action-button-icon {
+    -fx-font-size: 24px;
+    -fx-font-weight: normal;
+}
+
+.quick-action-button-text {
+    -fx-text-fill: #4d3d32;
+    -fx-font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+
+/* ==================== TRACKING BOXES ==================== */
+
+.tracking-box {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 2);
+    -fx-spacing: 8px;
+}
+
+/* Emoji styling */
+.tracking-emoji {
+    -fx-font-size: 20px;
+    -fx-font-weight: normal;
+}
+
+/* Percentage styling */
+.tracking-percentage {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+}
+
+.tracking-percentage-positive {
+    -fx-text-fill: #22c55e;
+    -fx-background-color: rgba(34, 197, 94, 0.1);
+}
+
+.tracking-percentage-negative {
+    -fx-text-fill: #ef4444;
+    -fx-background-color: rgba(239, 68, 68, 0.1);
+}
+
+.tracking-percentage-neutral {
+    -fx-text-fill: #6b7280;
+    -fx-background-color: rgba(107, 114, 128, 0.1);
+}
+
+/* Main value styling */
+.tracking-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #9c6c4b;
+}
+
+/* Label styling */
+.tracking-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #6b7280;
+}
+
+
+/* ==================== TRANSACTIONS ==================== */
+
+.transaction-item-button {
+    -fx-background-color: #f5f4f0;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.transaction-item-button-hover {
+    -fx-background-color: #f5f4f0ec;
+}
+
+.transaction-title {
+    -fx-text-fill: #9b6c4b;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.transaction-category-date {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666666;
+}
+
+.transaction-amount {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.transaction-amount-negative {
+    -fx-text-fill: #d73a4ad3;
+}
+
+.transaction-amount-positive {
+    -fx-text-fill: #28a746dc;
+}
+
+.transaction-action-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 4px;
+}
+
+.transaction-action-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------- RECENT ACTIVITY ---------------------- */
+
+.recent-activity-container {
+    -fx-background-color: #f5f2ed;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 2px;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+}
+
+.widget-title {
+    -fx-text-fill: #9b6c4b;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.widget-header-container {
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.recent-activity-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 1 0 0 0;
+}
+
+.recent-activity-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.recent-activity-scroll .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.see-more-button {
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #333333;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.see-more-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*-------------------MONTHLY OVERVIEW -------------------------*/
+
+.monthlyoverview-widget-container {
+    -fx-background-color: #e8e3da;
+    -fx-border-color: #d9d2c7;
+    -fx-border-width: 2px;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
 }
