@@ -13,8 +13,22 @@ public class ViewNavigator {
     // scene is the view (Login, signup, dashboard)
     public static void switchViews(Scene scene){
         if (mainStage != null) {
+            // save current state
+            boolean wasMaximized = mainStage.isMaximized();
+            double width = mainStage.getWidth();
+            double height = mainStage.getHeight();
+
             mainStage.setScene(scene);
-            mainStage.setFullScreen(true);
+
+            // restore maximized state
+            mainStage.setMaximized(wasMaximized);
+
+            // if not maximized, restore size
+            if (!wasMaximized) {
+                mainStage.setWidth(width);
+                mainStage.setHeight(height);
+            }
+
             mainStage.show();
         }
     }

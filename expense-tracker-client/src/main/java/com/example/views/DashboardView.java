@@ -25,7 +25,7 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
 
     /* ----------------------- LAYOUT CONTAINERS ----------------------- */
     
-    private BorderPane mainContainer;
+        private BorderPane mainContainer;
     private VBox currentActiveSection;
     private String activeTab = "Dashboard";
     
@@ -108,13 +108,15 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
                 // handle navigation within dashboard
                 switch (destination) {
                     case "dashboard":
-                        // Switch to dashboard content
+                        System.out.println("Already on dashboard");
                         break;
                     case "reports":
-                        // Switch to reports content
+                        // switch to reports view
+                        ReportsView reportsView = new ReportsView();
+                        reportsView.show();
                         break;
                     case "goals":
-                        // Switch to goals content
+                        System.out.println("Goals - work in progress still");
                         break;
                     case "logout":
                         // handle logout - switch back to AuthView
@@ -493,7 +495,6 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
     /* ----------------------- DASHBOARD GRID ----------------------- */
     private GridPane createDashboardGrid() {
         GridPane grid = new GridPane();
-        grid.getStyleClass().add("o-debug-border");
         grid.setMaxWidth(1100);
         grid.setHgap(24);
         grid.setVgap(24);
@@ -526,8 +527,6 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         // Widget header
         HBox header = new HBox(12);
         header.setAlignment(Pos.CENTER_LEFT);
-        //header.setPadding(new Insets(0,0,5,0));
-        //header.getStyleClass().add("widget-header-container");
         
         SVGPath icon = new SVGPath();
         icon.setContent("M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z");
@@ -755,9 +754,12 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         HBox header = new HBox(12);
         header.setAlignment(Pos.CENTER_LEFT);
         
-        Label icon = new Label("📈");
-        icon.getStyleClass().add("widget-icon");
-        
+        SVGPath icon = new SVGPath();
+        icon.setContent("M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z");
+        icon.setFill(Color.BLACK);
+        icon.setScaleX(0.9);
+        icon.setScaleY(0.9);
+
         Label title = new Label("Monthly Overview");
         title.getStyleClass().add("widget-title");
         
@@ -767,16 +769,18 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         VBox overview = new VBox(16);
         
         // Spent this month
-        HBox spentRow = createOverviewRow("Spent This Month", "$1,247.50", false);
-        HBox budgetRow = createOverviewRow("Budget Remaining", "$752.50", false);
+        HBox spentRow = createOverviewRow("Spent This Month", "$1,247.50");
+        HBox budgetRow = createOverviewRow("Budget Remaining", "$752.50");
         
         // Savings goal with progress
         VBox goalSection = new VBox(8);
-        HBox goalHeader = createOverviewRow("Savings Goal", "78% 🔥", false);
+        HBox goalHeader = createOverviewRow("Savings Goal", "78%");
         
         // Progress bar
-        ProgressBar progressBar = new ProgressBar(0.78);
-        progressBar.getStyleClass().add("savings-progress-bar");
+        // TODO: add logic to increase and decrease bar depending on real values
+
+        ProgressBar progressBar = new ProgressBar(0.5);
+        progressBar.getStyleClass().add("saving-progress-bar");
         progressBar.setPrefHeight(8);
         progressBar.setMaxWidth(Double.MAX_VALUE);
         
@@ -789,10 +793,13 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         Label message = new Label("Great job staying on budget!");
         message.getStyleClass().add("encouragement-text");
         
-        Label emoji = new Label("💪");
-        emoji.getStyleClass().add("encouragement-emoji");
-        
-        encouragement.getChildren().addAll(message, emoji);
+        SVGPath encourangeIcon = new SVGPath();
+        encourangeIcon.setContent("M21.37 36c1.45-5.25 6.52-9 12.36-8.38c5.56.59 9.98 5.28 10.26 10.86c.07 1.47-.13 2.88-.56 4.19c-.26.8-1.04 1.33-1.89 1.33H11.758c-5.048 0-8.834-4.619-7.844-9.569L10 4h12l4 7l-8.57 6.13L15 14m2.44 3.13L22 34");
+        encourangeIcon.setFill(Color.valueOf("#0000009e"));
+        encourangeIcon.setScaleX(0.8);
+        encourangeIcon.setScaleY(0.8);
+
+        encouragement.getChildren().addAll(message, encourangeIcon);
         
         overview.getChildren().addAll(spentRow, budgetRow, goalSection, encouragement);
         
@@ -801,7 +808,7 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
     }
     
     /* ----------------------- OVERVIEW ROW ----------------------- */
-    private HBox createOverviewRow(String label, String value, boolean highlight) {
+    private HBox createOverviewRow(String label, String value) {
         HBox row = new HBox();
         row.setAlignment(Pos.CENTER_LEFT);
         
@@ -813,7 +820,6 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         
         Label valueText = new Label(value);
         valueText.getStyleClass().add("overview-value");
-        if (highlight) valueText.getStyleClass().add("overview-value-highlight");
         
         row.getChildren().addAll(labelText, spacer, valueText);
         return row;
