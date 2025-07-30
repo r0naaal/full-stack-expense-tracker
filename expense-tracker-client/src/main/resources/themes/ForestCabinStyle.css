@@ -720,12 +720,6 @@
     -fx-font-weight: bold;
 }
 
-.widget-header-container {
-    -fx-border-color: #d9d2c7;
-    -fx-border-width: 0 0 1 0;
-}
-
-
 .recent-activity-scroll {
     -fx-background-color: transparent;
     -fx-border-color: transparent;

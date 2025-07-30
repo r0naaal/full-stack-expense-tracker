@@ -16,7 +16,8 @@ public class SidebarUtil {
 
     public enum SidebarType {
         AUTH_VIEW,
-        DASHBOARD_VIEW
+        DASHBOARD_VIEW,
+        REPORTS_VIEW
     }
     
     private static boolean sidebarExpanded = false;
@@ -132,6 +133,9 @@ public class SidebarUtil {
             // For now, just return empty content section
             contentSection.setVisible(sidebarExpanded && !themePickerVisible);
             contentSection.setManaged(sidebarExpanded && !themePickerVisible);
+        } else if (sidebarType == SidebarType.REPORTS_VIEW) {
+            contentSection.setVisible(sidebarExpanded && !themePickerVisible);
+            contentSection.setManaged(sidebarExpanded && !themePickerVisible);
         }
         
         currentFeaturesPreview = contentSection;
@@ -217,13 +221,47 @@ public class SidebarUtil {
             
         } else if (sidebarType == SidebarType.DASHBOARD_VIEW) {
             dashboardBtn = createNavigationButton(dashboardIcon, "Dashboard");
-            dashboardBtn.getStyleClass().add("sidebar-nav-button-active"); // Default active
+            setActiveNavButton(dashboardBtn); // default active
             dashboardBtn.setOnMouseClicked(e -> {
                 setActiveNavButton(dashboardBtn);
                 if (navigationCallback != null) navigationCallback.onNavigate("dashboard");
             });
             
             reportsBtn = createNavigationButton(reportsIcon, "Reports");
+            reportsBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(reportsBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("reports");
+            });
+            
+            themePickerBtn = createNavigationButton(themePickerIcon, "Customize Theme");
+            themePickerBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    toggleThemePicker();
+                }
+            });
+            
+            goalsBtn = createNavigationButton(goalsIcon, "Goals");
+            goalsBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(goalsBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("goals");
+            });
+            
+            logoutBtn = createNavigationButton(logoutIcon, "Logout");
+            logoutBtn.setOnMouseClicked(e -> {
+                if (navigationCallback != null) navigationCallback.onNavigate("logout");
+            });
+            
+            navigation.getChildren().addAll(dashboardBtn, reportsBtn, themePickerBtn, goalsBtn, logoutBtn);
+        } else if (sidebarType == SidebarType.REPORTS_VIEW){
+            dashboardBtn = createNavigationButton(dashboardIcon, "Dashboard");
+            dashboardBtn.setOnMouseClicked(e -> {
+                setActiveNavButton(dashboardBtn);
+                if (navigationCallback != null) navigationCallback.onNavigate("dashboard");
+            });
+            
+            reportsBtn = createNavigationButton(reportsIcon, "Reports");
+            setActiveNavButton(reportsBtn); // default active
             reportsBtn.setOnMouseClicked(e -> {
                 setActiveNavButton(reportsBtn);
                 if (navigationCallback != null) navigationCallback.onNavigate("reports");
@@ -324,7 +362,7 @@ public class SidebarUtil {
             if (themePickerBtn != null) {
                 updateNavigationButton(themePickerBtn, themePickerIcon, "Customize Theme");
             }
-        } else if (currentSidebarType == SidebarType.DASHBOARD_VIEW) {
+        } else if (currentSidebarType == SidebarType.DASHBOARD_VIEW || currentSidebarType == SidebarType.REPORTS_VIEW) {
             if (dashboardBtn != null) updateNavigationButton(dashboardBtn, dashboardIcon, "Dashboard");
             if (reportsBtn != null) updateNavigationButton(reportsBtn, reportsIcon, "Reports");
             if (themePickerBtn != null) updateNavigationButton(themePickerBtn, themePickerIcon, "Customize Theme");
