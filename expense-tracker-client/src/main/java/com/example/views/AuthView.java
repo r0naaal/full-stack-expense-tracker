@@ -66,6 +66,9 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         
         // reset sidebar theme picker state when showing the view
         SidebarUtil.resetThemePickerState();
+
+        // login button is always active for default
+        switchToLoginMode();
     }
 
     // overloaded method to show with current theme:
@@ -106,10 +109,10 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         topBar = createTopBar();
 
         // Main content with auth forms
-        VBox mainContent = createMainContent();
+        ScrollPane mainContent = createMainContent();
         
         contentArea.getChildren().addAll(topBar, mainContent);
-        VBox.setVgrow(mainContent, Priority.ALWAYS);
+        HBox.setHgrow(mainContent, Priority.ALWAYS);
         
         return contentArea;
     }
@@ -141,18 +144,25 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         return bar;
     }
 
-    private VBox createMainContent() {
-        VBox mainContent = new VBox();
-        mainContent.setAlignment(Pos.CENTER);
-        mainContent.setPadding(new Insets(0, 40, 0, 40));
-        
+    private ScrollPane createMainContent() {
+        ScrollPane mainContent = new ScrollPane();
+        mainContent.setFitToWidth(true);
+        mainContent.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        mainContent.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        mainContent.setPadding(new Insets(30, 10, 0, 30));
+        mainContent.getStyleClass().add("auth-content-scroll");
+
+        VBox content = new VBox();
+        content.setMaxWidth(Double.MAX_VALUE);
+
+
         // Two column layout
         HBox layout = new HBox();
         layout.setAlignment(Pos.CENTER);
         layout.setPrefHeight(600);
         layout.setMinHeight(600);
         layout.setMaxHeight(600);
-        layout.setPadding(new Insets(0, 60, 0, 0));
+        layout.setPadding(new Insets(0, 30, 0, 0));
         
         // Branding column (left)
         brandingColumn = createBrandingColumn();
@@ -164,7 +174,7 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
         layout.getChildren().addAll(brandingColumn, spacer, authColumn);
-        mainContent.getChildren().add(layout);
+        content.getChildren().add(layout);
         
         // Make columns wider
         brandingColumn.setMinWidth(380);
@@ -177,6 +187,8 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         layout.setMaxWidth(1300);
         layout.setPrefWidth(1100);
         
+        mainContent.setContent(content);
+
         return mainContent;
     }
 
@@ -184,15 +196,17 @@ public class AuthView implements ThemeManager.ThemeChangeListener {
         VBox column = new VBox();
         column.getStyleClass().add("default-branding-column");
         column.setAlignment(Pos.TOP_LEFT);
+        column.setPadding(new Insets(0, 10, 0,0));
         column.setPrefWidth(700);
         
         // Logo section
         HBox logoSection = new HBox(12);
+        logoSection.setPadding(new Insets(0,0,0,10));
         logoSection.setAlignment(Pos.CENTER_LEFT);
         
         SVGPath logoIcon = new SVGPath();
         logoIcon.setContent("M15 10C15 9.45 15.45 9 16 9C16.55 9 17 9.45 17 10S16.55 11 16 11 15 10.55 15 10M22 7.5V14.47L19.18 15.41L17.5 21H12V19H10V21H4.5C4.5 21 2 12.54 2 9.5S4.46 4 7.5 4H12.5C13.41 2.79 14.86 2 16.5 2C17.33 2 18 2.67 18 3.5C18 3.71 17.96 3.9 17.88 4.08C17.74 4.42 17.62 4.81 17.56 5.23L19.83 7.5H22M20 9.5H19L15.5 6C15.5 5.35 15.59 4.71 15.76 4.09C14.79 4.34 14 5.06 13.67 6H7.5C5.57 6 4 7.57 4 9.5C4 11.38 5.22 16.15 6 19H8V17H14V19H16L17.56 13.85L20 13.03V9.5Z");
-        logoIcon.setFill(Color.valueOf("#000000")); // black
+        logoIcon.setFill(Color.valueOf("#000000"));
         logoIcon.setScaleX(1.8);
         logoIcon.setScaleY(1.8);
         

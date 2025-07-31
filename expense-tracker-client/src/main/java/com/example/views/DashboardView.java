@@ -6,9 +6,8 @@ import com.example.utils.ThemeManager;
 import com.example.utils.ViewNavigator;
 import com.example.utils.SidebarUtil.SidebarType;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -25,7 +24,7 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
 
     /* ----------------------- LAYOUT CONTAINERS ----------------------- */
     
-        private BorderPane mainContainer;
+    private BorderPane mainContainer;
     private VBox currentActiveSection;
     private String activeTab = "Dashboard";
     
@@ -133,19 +132,6 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         // reset sidebar theme picker state when showing the view
         SidebarUtil.resetThemePickerState();
     }
-
-    public void show(){
-        show(null);
-    }
-
-    @Override
-    public void onThemeChanged(String newTheme) {
-        if (currentScene != null) {
-            currentScene.getStylesheets().clear();
-            currentScene.getStylesheets().add(getClass().getResource("/themes/" + newTheme + "Style.css").toExternalForm());
-            System.out.println("Current stylesheet: " + newTheme + "Style.css loaded.");
-        }
-    }
     
     /* ----------------------- MAIN SCENE CREATION ----------------------- */
     private Scene createScene(String theme) {
@@ -223,7 +209,8 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         scrollPane.getStyleClass().add("dashboard-content-scroll");
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(0);
 
         VBox content = new VBox(24);
         content.getStyleClass().add("content-container-vbox");
@@ -470,7 +457,7 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         Button button = new Button();
         button.setFocusTraversable(false);
         button.getStyleClass().add("quick-action-button");
-        System.out.println("Styles for quickactionbutton: " + button.getStyle());
+        //System.out.println("Styles for quickactionbutton: " + button.getStyle());
         button.setPrefHeight(80);
         button.setPrefWidth(250);
 
@@ -519,7 +506,7 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
     /* ----------------------- RECENT ACTIVITY WIDGET ----------------------- */
     private VBox createRecentActivityWidget() {
         VBox widget = new VBox(16);
-        widget.getStyleClass().add("recent-activity-container");
+        widget.getStyleClass().add("left-widget-container");
 
         widget.setPadding(new Insets(16));
         widget.setPrefWidth(500);
@@ -779,8 +766,8 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         // Progress bar
         // TODO: add logic to increase and decrease bar depending on real values
 
-        ProgressBar progressBar = new ProgressBar(0.5);
-        progressBar.getStyleClass().add("saving-progress-bar");
+        ProgressBar progressBar = new ProgressBar((78/100));
+        progressBar.getStyleClass().add("progress-bar");
         progressBar.setPrefHeight(8);
         progressBar.setMaxWidth(Double.MAX_VALUE);
         
@@ -823,6 +810,19 @@ public class DashboardView implements ThemeManager.ThemeChangeListener {
         
         row.getChildren().addAll(labelText, spacer, valueText);
         return row;
+    }
+
+    public void show(){
+        show(null);
+    }
+
+    @Override
+    public void onThemeChanged(String newTheme) {
+        if (currentScene != null) {
+            currentScene.getStylesheets().clear();
+            currentScene.getStylesheets().add(getClass().getResource("/themes/" + newTheme + "Style.css").toExternalForm());
+            System.out.println("Current stylesheet: " + newTheme + "Style.css loaded.");
+        }
     }
     
     /* ----------------------- TAB SWITCHING ----------------------- */
