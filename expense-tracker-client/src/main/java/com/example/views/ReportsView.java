@@ -1,28 +1,15 @@
 package com.example.views;
 
-import java.util.Calendar;
-
-import com.example.controllers.DashboardController;
 import com.example.controllers.ReportsController;
 import com.example.utils.SidebarUtil;
 import com.example.utils.ThemeManager;
 import com.example.utils.ViewNavigator;
 import com.example.utils.SidebarUtil.SidebarType;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.geometry.*;  
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
@@ -175,21 +162,20 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
     private HBox createReportPeriod() {
         HBox reportPeriod = new HBox();
         reportPeriod.setPadding(new Insets(0, 5, 0, 5));
-        reportPeriod.getStyleClass().add("p-debug-border");
-        // reportPeriod.getStyleClass().add("report-period");
+        reportPeriod.setMaxWidth(1100);
+        reportPeriod.setMaxHeight(40);
         
         HBox heading = new HBox(12);
-        heading.setAlignment(Pos.CENTER_LEFT);
-        heading.getStyleClass().add("debug-border");
+        heading.setAlignment(Pos.CENTER);
 
         SVGPath calendarIcon = new SVGPath();
         calendarIcon.setContent("M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.9 20.11 3 19 3M19 19H5V9H19V19M19 7H5V5H19V7Z");
-        calendarIcon.setFill(Color.valueOf("#0000009f"));
+        calendarIcon.setFill(Color.valueOf("#000000ff"));
         calendarIcon.setScaleX(1.4);
         calendarIcon.setScaleY(1.4);
 
         Label headingLabel = new Label("Reporting Period");
-        headingLabel.getStyleClass().add("report-heading-label");
+        headingLabel.getStyleClass().add("report-title");
 
         heading.getChildren().addAll(calendarIcon, headingLabel);
 
@@ -197,13 +183,27 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         HBox toggleContainer = new HBox(2);
-        toggleContainer.getStyleClass().add("debug-border");
-        //toggleContainer.getStyleClass().add("period-toggle-container");
+        toggleContainer.setPadding(new Insets(2));
+        toggleContainer.setAlignment(Pos.CENTER);
+        toggleContainer.getStyleClass().add("period-mode-toggle");
+        //toggleContainer.getStyleClass().add("debug-border");
 
+        // TODO: add period logic
         Button week = new Button("Week");
+        week.getStyleClass().add("period-mode-toggle-button");
+        week.setFocusTraversable(false);
+        
         Button month = new Button("Month");
+        month.getStyleClass().add("period-mode-toggle-button");
+        month.setFocusTraversable(false);
+        
         Button quarter = new Button("Quarter");
+        quarter.getStyleClass().add("period-mode-toggle-button");
+        quarter.setFocusTraversable(false);
+        
         Button year = new Button("Year");
+        year.getStyleClass().add("period-mode-toggle-button");
+        year.setFocusTraversable(false);
 
         toggleContainer.getChildren().addAll(week, month, quarter, year);
 
@@ -214,7 +214,6 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
 
     private GridPane createQuickLabelGrid() {
         GridPane grid = new GridPane();
-        grid.getStyleClass().add("o-debug-border");
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(20); 
         grid.setVgap(20);
@@ -236,7 +235,7 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
         // create tracking boxes
         VBox totalExpenseBox = createTrackingBox(totalExpensesIcon, "+23.5%", "$2890.49", "Total Expenses");
         VBox monthlySavingsBox = createTrackingBox(monthlySavingsIcon, "+15.2%", "$610", "Monthly Savings");
-        VBox savingsRateBox = createTrackingBox(savingsRateIcon, "+2.1%", "%17.4", "Savings Rate");
+        VBox savingsRateBox = createTrackingBox(savingsRateIcon, "+2.1%", "17.4%", "Savings Rate");
         VBox transactionsBox = createTrackingBox(transactionsIcon, "8 This week", "127", "Transactions");
 
         // put the boxes in the grid
@@ -261,8 +260,7 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
 
     private static VBox createTrackingBox(SVGPath icon, String percentage, String value, String label) {
         VBox box = new VBox(8);
-        box.getStyleClass().add("b-debug-border");
-        //box.getStyleClass().add("reports-tracking-box");
+        box.getStyleClass().add("period-tracking-box");
         box.setPadding(new Insets(16));
         box.setAlignment(Pos.CENTER);
         box.setMaxWidth(Double.MAX_VALUE);
@@ -272,7 +270,7 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
 
         SVGPath clonIcon = new SVGPath();
         clonIcon.setContent(icon.getContent());
-        clonIcon.setFill(Color.valueOf("#000000b6"));
+        clonIcon.setFill(Color.valueOf("#000000a7"));
         clonIcon.setScaleX(1.1);
         clonIcon.setScaleY(1.1);
 
@@ -305,11 +303,12 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
          // add specific styling based on positive/negative
         if (percentage != null) {
             if (percentage.startsWith("+")) {
-                percentageLabel.getStyleClass().add("tracking-percentage-positive");
+                percentageLabel.getStyleClass().add("tracking-percentage-positive-nobg");
             } else if (percentage.startsWith("-")) {
-                percentageLabel.getStyleClass().add("tracking-percentage-negative");
+                percentageLabel.getStyleClass().add("tracking-percentage-negative-nobg");
             } else {
-                percentageLabel.getStyleClass().add("tracking-percentage-neutral");
+                percentageLabel.setText("+" + percentageLabel.getText());
+                percentageLabel.getStyleClass().add("tracking-percentage-neutral-nobg");
             }
         }
 
@@ -323,6 +322,7 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
     private GridPane createReportWidgets() {
         GridPane grid = new GridPane();
         grid.setMaxWidth(1100);
+        grid.setMaxHeight(500);
         grid.setHgap(24);
         grid.setVgap(24);
         
@@ -345,17 +345,34 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
 
 
     private VBox createExpenseCategoryWidget() {
-        VBox box = new VBox(10);
-        box.getStyleClass().add("p-debug-border");
-        //box.getStyleClass().add("expense-category-widget");
+        VBox box = new VBox(16);
+        box.setPadding(new Insets(16));
+        box.getStyleClass().add("left-widget-container");
+        box.setPrefWidth(500);
+
+        HBox titleBox = new HBox(12);
+        titleBox.setAlignment(Pos.CENTER_LEFT);
+
+        SVGPath expenseCateGoriesIcon = new SVGPath();
+        expenseCateGoriesIcon.setContent("M9 17H7V10H9V17M13 17H11V7H13V17M17 17H15V13H17V17M19 19H5V5H19V19.1M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z");
+        expenseCateGoriesIcon.setFill(Color.valueOf("#000000"));
+        expenseCateGoriesIcon.setScaleX(1.1);
+        expenseCateGoriesIcon.setScaleY(1.1);
+
+        Label titleLabel = new Label("Expense Categories");
+        titleLabel.getStyleClass().add("widget-title");
+
+        titleBox.getChildren().addAll(expenseCateGoriesIcon, titleLabel);
         
         ScrollPane scrollPane = new ScrollPane();
-        
+         scrollPane.getStyleClass().add("recent-activity-scroll");
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setMaxHeight(500);
 
-        VBox categoriesContainer = new VBox(10);
+        VBox categoriesContainer = new VBox(20);
+        categoriesContainer.setPadding(new Insets(10,0,5,0));
 
         // TODO: replace with real categories
         String[] categories = {"Food & Dining", "Transportation", "Shopping", "Entertainment", "Utilities"};
@@ -367,55 +384,129 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
         }
 
         scrollPane.setContent(categoriesContainer);
-        box.getChildren().add(scrollPane);
+        box.getChildren().addAll(titleBox, scrollPane);
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
         return box;
     }
 
-    private HBox createCategoryRow(String categoryName, double amountSpent, double totalAmount) {
-        HBox row = new HBox(10);
-        row.setAlignment(Pos.CENTER_LEFT);
-        row.getStyleClass().add("b-debug-border");
+    private VBox createCategoryRow(String categoryName, double amountSpent, double totalAmount) {
+        VBox row = new VBox();
+        row.setAlignment(Pos.CENTER);
+
+        HBox nameBox = new HBox();
 
         Label nameLabel = new Label(categoryName);
+        nameLabel.getStyleClass().add("category-title");
+        
         Label amountLabel = new Label("$" + amountSpent);
+        amountLabel.getStyleClass().add("category-value");
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        nameBox.getChildren().addAll(nameLabel, spacer, amountLabel);
+
+        HBox progressBox = new HBox();
 
         // calculate percentage
         double percentage = (amountSpent / totalAmount) * 100;
-        ProgressBar progressBar = new ProgressBar(percentage / 100);
-        Label percentageLabel = new Label(String.format("%.1f%%", percentage));
 
-        // add components to row
+        ProgressBar progressBar = new ProgressBar(percentage / 100);
+        progressBar.setPrefWidth(300);
+        progressBar.setMaxWidth(600);
+        progressBar.setMaxHeight(20); 
+        progressBar.getStyleClass().add("progress-bar");
+
         HBox.setHgrow(progressBar, Priority.ALWAYS);
-        row.getChildren().addAll(nameLabel, new Region(), amountLabel, progressBar, percentageLabel);
+
+        Label percentageLabel = new Label(String.format("%.1f%%", percentage));
+        percentageLabel.getStyleClass().add("report-category-percentage");
+
+        Region spacer2 = new Region();
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+
+        progressBox.getChildren().addAll(progressBar, spacer2, percentageLabel);
         
+        row.getChildren().addAll(nameBox, progressBox);
         return row;
     }
 
-
     private VBox createPeriodTrendWidget() {
-        // TODO: add styling
-        VBox box = new VBox(10);
-        box.getStyleClass().add("period-trend-widget");
-        box.getStyleClass().add("debug-border");
+        VBox box = new VBox(16);
+        box.setPadding(new Insets(16));
+
+        box.getStyleClass().add("left-widget-container");
+        box.setMaxHeight(500);
+
+        HBox header = new HBox(12);
+        header.setAlignment(Pos.CENTER_LEFT);
+
+        SVGPath expenseCateGoriesIcon = new SVGPath();
+        expenseCateGoriesIcon.setContent("M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z");
+        expenseCateGoriesIcon.setFill(Color.valueOf("#000000"));
+        expenseCateGoriesIcon.setScaleX(1.1);
+        expenseCateGoriesIcon.setScaleY(1.1);
+
+        Label titleLabel = new Label("Monthly Trend");
+        titleLabel.getStyleClass().add("widget-title");
+
+        header.getChildren().addAll(expenseCateGoriesIcon, titleLabel);
 
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.getStyleClass().add("recent-activity-scroll");
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setMaxHeight(500);
 
-        VBox contentContainer = new VBox(10);
+        VBox contentContainer = new VBox(15);
+        contentContainer.setPadding(new Insets(10,0,5,0));
 
-        // header Row
-        HBox headerRow = new HBox(20);
+        // Header Row
+        GridPane headerRow = new GridPane();
         headerRow.getStyleClass().add("header-row");
-        
-        Label monthLabel = new Label("Month");
-        Label incomeLabel = new Label("Income");
-        Label expensesLabel = new Label("Expenses");
-        Label savingsLabel = new Label("Savings");
+        headerRow.setHgap(30);
+        headerRow.setVgap(10); 
+        headerRow.setAlignment(Pos.CENTER);
 
-        headerRow.getChildren().addAll(monthLabel, incomeLabel, expensesLabel, savingsLabel);
+        // create labels for each column
+        Label monthLabel = new Label("Month");
+        monthLabel.getStyleClass().add("table-label");
+        
+        Label incomeLabel = new Label("Income");
+        incomeLabel.getStyleClass().add("table-label");
+        
+        Label expensesLabel = new Label("Expenses");
+        expensesLabel.getStyleClass().add("table-label");
+        
+        Label savingsLabel = new Label("Savings");
+        savingsLabel.getStyleClass().add("table-label");
+
+        // add labels to the grid
+        headerRow.add(monthLabel, 0, 0);
+        headerRow.add(incomeLabel, 1, 0); 
+        headerRow.add(expensesLabel, 2, 0);
+        headerRow.add(savingsLabel, 3, 0); 
+
+        // set column constraints for even spacing
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setHgrow(Priority.ALWAYS);
+        headerRow.getColumnConstraints().add(col1);
+
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setHgrow(Priority.ALWAYS);
+        headerRow.getColumnConstraints().add(col2);
+
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setHgrow(Priority.ALWAYS);
+        headerRow.getColumnConstraints().add(col3);
+
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setHgrow(Priority.ALWAYS);
+        headerRow.getColumnConstraints().add(col4);
+
+        // add the header row to the content container
         contentContainer.getChildren().add(headerRow);
 
         // TODO: replace with real data
@@ -444,22 +535,43 @@ public class ReportsView implements ThemeManager.ThemeChangeListener {
         }
 
         scrollPane.setContent(contentContainer);
-        box.getChildren().add(scrollPane);
+        box.getChildren().addAll(header, scrollPane);
 
         return box;
     }
 
-    private HBox createTrendRow(String month, double income, double expenses, double savings) {
-        HBox row = new HBox(20);
-        row.setAlignment(Pos.CENTER_LEFT);
-        
-        Label monthLabel = new Label(month);
-        Label incomeLabel = new Label("$" + income);
-        Label expensesLabel = new Label("$" + expenses);
-        Label savingsLabel = new Label("$" + savings);
+    private GridPane createTrendRow(String month, double income, double expenses, double savings) {
+        GridPane row = new GridPane();
+        row.getStyleClass().add("trend-row");
+        row.setPadding(new Insets(10));
+        row.setAlignment(Pos.CENTER);
 
-        row.getChildren().addAll(monthLabel, incomeLabel, expensesLabel, savingsLabel);
+        row.setHgap(30);
+        row.setVgap(15);
+
+        Label monthLabel = new Label(month);
+        monthLabel.getStyleClass().add("month-label");
+        row.add(monthLabel, 0, 0);
+
+        Label incomeLabel = new Label("$" + income);
+        incomeLabel.getStyleClass().add("income-label");
+        row.add(incomeLabel, 1, 0);
         
+        Label expensesLabel = new Label("$" + expenses);
+        expensesLabel.getStyleClass().add("expenses-label");
+        row.add(expensesLabel, 2, 0);
+        
+        Label savingsLabel = new Label("$" + savings);
+        savingsLabel.getStyleClass().add("savings-label");
+        row.add(savingsLabel, 3, 0);
+
+        // Set constraints for consistent spacing
+        for (int i = 0; i < 4; i++) {
+            ColumnConstraints col = new ColumnConstraints();
+            col.setHgrow(Priority.ALWAYS);
+            row.getColumnConstraints().add(col);
+        }
+
         return row;
     }
 
